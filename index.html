@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<title>Chawy Slemani — بەڕێوەبردنی موڵک</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Vazirmatn','Noto Kufi Arabic','Noto Naskh Arabic',sans-serif;background:#F4F7FB;color:#1B2A41;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  input{font-family:inherit;}
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:#D4DCE8;border-radius:8px;border:2px solid transparent;background-clip:padding-box;}
+  ::-webkit-scrollbar-thumb:hover{background:#bccadc;background-clip:padding-box;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  @keyframes pop{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
+  @keyframes overlay{from{opacity:0;}to{opacity:1;}}
+</style>
+</helmet>
+<div dir="rtl" style="height:100vh;display:flex;flex-direction:column;background:#F4F7FB;overflow:hidden;">
+
+  <div style="height:56px;background:#fff;border-bottom:1px solid #E3E9F2;display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;position:relative;z-index:30;box-shadow:0 1px 0 rgba(27,42,65,.02);">
+    <div style="display:flex;align-items:center;gap:11px;">
+      <svg width="30" height="30" viewBox="0 0 48 48" fill="none"><path d="M4 24 C12 13, 36 13, 44 24 C36 35, 12 35, 4 24 Z" fill="#EAF4FC" stroke="#1E8FD5" stroke-width="2.6"/><circle cx="24" cy="24" r="7.6" fill="#1E8FD5"/><circle cx="21" cy="21" r="2.4" fill="#fff"/></svg>
+      <div style="display:flex;flex-direction:column;line-height:1.12;white-space:nowrap;">
+        <span style="font-weight:800;font-size:16px;color:#1B2A41;letter-spacing:.2px;white-space:nowrap;">{{ cityName }}</span>
+        <span style="font-size:10px;color:#2BB3C0;font-weight:700;letter-spacing:.3px;white-space:nowrap;">Life Just Got Better</span>
+      </div>
+    </div>
+    <div style="display:flex;background:#F0F4F9;border:1px solid #E3E9F2;border-radius:12px;padding:3px;gap:3px;">
+      <button onClick="{{ toStaff }}" style="{{ staffTabStyle }}">ستاف (دێسکتۆپ)</button>
+      <button onClick="{{ toOwner }}" style="{{ ownerTabStyle }}">خاوەن (مۆبایل)</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ showStaffApp }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex:1;min-height:0;">
+      <div style="width:250px;flex-shrink:0;background:#fff;border-left:1px solid #E3E9F2;display:flex;flex-direction:column;min-height:0;">
+        <div style="display:flex;flex-direction:column;gap:3px;padding:14px 12px;overflow-y:auto;flex:1;">
+          <sc-for list="{{ nav }}" as="item" hint-placeholder-count="12">
+            <button onClick="{{ item.go }}" style="{{ item.style }}">
+              <span style="width:22px;display:flex;justify-content:center;align-items:center;">{{ item.icon }}</span>
+              <span style="flex:1;text-align:right;font-size:13.5px;font-weight:600;">{{ item.label }}</span>
+              <sc-if value="{{ item.badge }}"><span style="background:#D1495B;color:#fff;font-size:10.5px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;">{{ item.badge }}</span></sc-if>
+            </button>
+          </sc-for>
+        </div>
+        <div style="padding:12px;border-top:1px solid #EEF2F7;display:flex;align-items:center;gap:10px;">
+          <div style="width:38px;height:38px;border-radius:11px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">ھـ</div>
+          <div style="flex:1;line-height:1.2;">
+            <div style="font-size:13px;font-weight:700;color:#1B2A41;">هێرش ئەکاونتانت</div>
+            <div style="font-size:11px;color:#6B7A90;">ژمێریار</div>
+          </div>
+          <button onClick="{{ staffLogout }}" title="چوونەدەرەوە" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;display:flex;align-items:center;justify-content:center;color:#6B7A90;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+        </div>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;">
+        <div style="height:64px;flex-shrink:0;background:#fff;border-bottom:1px solid #E3E9F2;display:flex;align-items:center;justify-content:space-between;padding:0 26px;gap:18px;">
+          <div style="display:flex;flex-direction:column;line-height:1.2;">
+            <span style="font-size:18px;font-weight:800;color:#1B2A41;">{{ pageTitle }}</span>
+            <span style="font-size:11.5px;color:#6B7A90;">{{ pageSub }}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;background:#F4F7FB;border:1px solid #E3E9F2;border-radius:11px;padding:0 12px;height:40px;width:260px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+              <input placeholder="گەڕان بۆ شوقە، خاوەن، کۆد…" style="border:none;background:none;outline:none;flex:1;font-size:13px;color:#1B2A41;"/>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:11px;height:40px;padding:0 13px;color:#1577B8;font-weight:700;font-size:12.5px;white-space:nowrap;">
+              <span style="width:7px;height:7px;border-radius:50%;background:#2E9E6B;display:inline-block;"></span>
+              نرخی دۆلار: $1 = {{ rateStr }} د.ع
+            </div>
+            <div style="width:40px;height:40px;border-radius:11px;background:#1E8FD5;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">ھـ</div>
+          </div>
+        </div>
+
+        <div style="flex:1;overflow-y:auto;padding:26px;">
+
+          <sc-if value="{{ scr_dashboard }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1280px;">
+              <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px;">
+                <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="6">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;">
+                      <span style="font-size:12.5px;color:#6B7A90;font-weight:600;">{{ k.label }}</span>
+                      <span style="width:9px;height:9px;border-radius:3px;background:{{ k.color }};"></span>
+                    </div>
+                    <span style="font-size:28px;font-weight:800;color:#1B2A41;line-height:1;">{{ k.value }}</span>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:18px;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);display:flex;flex-direction:column;">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div>
+                      <div style="font-size:13px;color:#6B7A90;font-weight:600;">کۆی کۆکراوە ئەم مانگە</div>
+                      <div style="font-size:34px;font-weight:900;color:#1B2A41;margin-top:6px;line-height:1;">142,500,000 <span style="font-size:18px;font-weight:700;color:#6B7A90;">د.ع</span></div>
+                      <div style="font-size:13px;color:#2BB3C0;font-weight:700;margin-top:5px;">≈ $96,900</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:5px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:9px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="21 12 21 7 16 7"/></svg>
+                      ‎+11.3%
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:flex-end;gap:14px;height:140px;margin-top:24px;padding-top:8px;">
+                    <sc-for list="{{ trend }}" as="t" hint-placeholder-count="6">
+                      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end;">
+                        <div style="font-size:11px;font-weight:700;color:#1B2A41;">{{ t.v }}</div>
+                        <div style="width:100%;max-width:46px;border-radius:8px 8px 0 0;background:{{ t.fill }};height:{{ t.h }};transition:height .4s ease;"></div>
+                        <div style="font-size:11px;color:#6B7A90;font-weight:600;">{{ t.m }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;">
+                    <div style="background:#FCEDEF;border:1px solid #F3D2D7;border-radius:12px;padding:14px 16px;">
+                      <div style="font-size:12.5px;color:#B23A4A;font-weight:600;">قەرزی دواکەوتوو</div>
+                      <div style="font-size:22px;font-weight:800;color:#D1495B;margin-top:4px;">28,300,000 <span style="font-size:13px;">د.ع</span></div>
+                      <div style="font-size:11.5px;color:#B23A4A;margin-top:2px;">≈ $19,250</div>
+                    </div>
+                    <div style="background:#FCEDEF;border:1px solid #F3D2D7;border-radius:12px;padding:14px 16px;">
+                      <div style="font-size:12.5px;color:#B23A4A;font-weight:600;">شوقەی دواکەوتوو</div>
+                      <div style="font-size:22px;font-weight:800;color:#D1495B;margin-top:4px;">37</div>
+                      <div style="font-size:11.5px;color:#B23A4A;margin-top:2px;">لە کۆی 432 شوقە</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);display:flex;flex-direction:column;">
+                  <div style="font-size:14px;font-weight:700;color:#1B2A41;">دۆخی نیشتەجێبوون</div>
+                  <div style="display:flex;align-items:center;gap:18px;margin-top:14px;">
+                    <div style="position:relative;width:150px;height:150px;flex-shrink:0;">
+                      <svg width="150" height="150" viewBox="0 0 150 150" style="transform:rotate(-90deg);">
+                        <circle cx="75" cy="75" r="54" fill="none" stroke="#F0F4F9" stroke-width="20"/>
+                        <sc-for list="{{ donut }}" as="d" hint-placeholder-count="4">
+                          <circle cx="75" cy="75" r="54" fill="none" stroke="{{ d.c }}" stroke-width="20" stroke-dasharray="{{ d.dash }}" stroke-dashoffset="{{ d.offset }}" stroke-linecap="butt"/>
+                        </sc-for>
+                      </svg>
+                      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                        <span style="font-size:26px;font-weight:900;color:#1B2A41;line-height:1;">432</span>
+                        <span style="font-size:11px;color:#6B7A90;font-weight:600;">شوقە</span>
+                      </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:11px;flex:1;">
+                      <sc-for list="{{ donut }}" as="d" hint-placeholder-count="4">
+                        <div style="display:flex;align-items:center;gap:9px;">
+                          <span style="width:11px;height:11px;border-radius:3px;background:{{ d.c }};flex-shrink:0;"></span>
+                          <span style="flex:1;font-size:12.5px;color:#6B7A90;font-weight:600;">{{ d.label }}</span>
+                          <span style="font-size:13px;font-weight:800;color:#1B2A41;">{{ d.v }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:18px;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                    <span style="font-size:15px;font-weight:700;color:#1B2A41;">دوایین پارەوەرگرتنەکان</span>
+                    <button onClick="{{ goPayments }}" style="font-size:12.5px;color:#1E8FD5;font-weight:700;">هەمووی ›</button>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1.3fr 1fr .9fr 1fr;gap:8px;padding:10px 6px;font-size:11.5px;color:#6B7A90;font-weight:700;border-bottom:1px solid #EEF2F7;">
+                    <span>کۆد / خاوەن</span><span>جۆر</span><span>بەروار</span><span style="text-align:left;">بڕ</span>
+                  </div>
+                  <sc-for list="{{ recentPayments }}" as="p" hint-placeholder-count="5">
+                    <div style="display:grid;grid-template-columns:1.3fr 1fr .9fr 1fr;gap:8px;padding:11px 6px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                      <div style="line-height:1.25;"><div style="font-size:13px;font-weight:700;color:#1B2A41;">{{ p.code }}</div><div style="font-size:11px;color:#6B7A90;">{{ p.owner }}</div></div>
+                      <span><span style="background:{{ p.tagBg }};color:{{ p.tagC }};font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:7px;">{{ p.type }}</span></span>
+                      <span style="font-size:12px;color:#6B7A90;">{{ p.date }}</span>
+                      <div style="text-align:left;line-height:1.2;white-space:nowrap;"><div style="font-size:13px;font-weight:800;color:#1B2A41;">{{ p.iqd }}</div><div style="font-size:10.5px;color:#2BB3C0;">{{ p.usd }}</div></div>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                    <span style="font-size:15px;font-weight:700;color:#1B2A41;">ئاگاداری دواکەوتوو</span>
+                    <button onClick="{{ goOverdue }}" style="font-size:12.5px;color:#D1495B;font-weight:700;">بینین ›</button>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:10px;">
+                    <sc-for list="{{ dashOverdue }}" as="o" hint-placeholder-count="4">
+                      <div onClick="{{ o.go }}" style="display:flex;align-items:center;gap:11px;padding:11px 12px;border:1px solid #EEF2F7;border-radius:12px;cursor:pointer;border-right:3px solid {{ o.sev }};">
+                        <div style="flex:1;line-height:1.3;">
+                          <div style="font-size:13px;font-weight:700;color:#1B2A41;">{{ o.code }}</div>
+                          <div style="font-size:11px;color:#6B7A90;">{{ o.owner }} · {{ o.since }}</div>
+                        </div>
+                        <div style="text-align:left;line-height:1.2;"><div style="font-size:13px;font-weight:800;color:{{ o.sev }};">{{ o.iqd }}</div><div style="font-size:10px;color:#6B7A90;">{{ o.usd }}</div></div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ scr_overdue }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1200px;">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+                <div style="background:linear-gradient(135deg,#D1495B,#B23A4A);border-radius:16px;padding:18px 20px;color:#fff;box-shadow:0 8px 22px -10px rgba(209,73,91,.5);">
+                  <div style="font-size:13px;opacity:.9;font-weight:600;">کۆی قەرزی دواکەوتوو</div>
+                  <div style="font-size:26px;font-weight:900;margin-top:6px;">28,300,000 د.ع</div>
+                  <div style="font-size:12px;opacity:.9;margin-top:3px;">≈ $19,250</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:18px 20px;">
+                  <div style="font-size:13px;color:#6B7A90;font-weight:600;">شوقەی دواکەوتوو</div>
+                  <div style="font-size:26px;font-weight:900;color:#1B2A41;margin-top:6px;">37</div>
+                  <div style="font-size:12px;color:#6B7A90;margin-top:3px;">٢+ مانگ: 14 · ١ مانگ: 23</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:18px 20px;">
+                  <div style="font-size:13px;color:#6B7A90;font-weight:600;">پەیوەندیکراو ئەمڕۆ</div>
+                  <div style="font-size:26px;font-weight:900;color:#2E9E6B;margin-top:6px;">9</div>
+                  <div style="font-size:12px;color:#6B7A90;margin-top:3px;">لە کۆی 37 شوقە</div>
+                </div>
+              </div>
+
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #EEF2F7;flex-wrap:wrap;gap:12px;">
+                  <div style="display:flex;align-items:center;gap:7px;">
+                    <span style="font-size:12px;color:#6B7A90;font-weight:700;margin-left:4px;">عیمارە:</span>
+                    <sc-for list="{{ bChips }}" as="c" hint-placeholder-count="4">
+                      <button onClick="{{ c.go }}" style="{{ c.style }}">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:7px;">
+                    <span style="font-size:12px;color:#6B7A90;font-weight:700;margin-left:4px;">پێشینە:</span>
+                    <button style="font-size:12.5px;font-weight:700;color:#1B2A41;background:#F4F7FB;border:1px solid #E3E9F2;border-radius:9px;padding:7px 12px;">بەپێی کۆی قەرز ▾</button>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.3fr 1fr 1fr 1.1fr 1.3fr;gap:10px;padding:12px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>کۆد</span><span>خاوەن</span><span>لە کەیەوە نەیداوە</span><span>دوایین پارەدان</span><span>کۆی قەرز</span><span style="text-align:left;">کردار</span>
+                </div>
+                <sc-for list="{{ overdueRows }}" as="o" hint-placeholder-count="7">
+                  <div style="display:grid;grid-template-columns:1fr 1.3fr 1fr 1fr 1.1fr 1.3fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;border-right:4px solid {{ o.sev }};">
+                    <button onClick="{{ o.go }}" style="font-size:14px;font-weight:800;color:#1E8FD5;text-align:right;">{{ o.code }}</button>
+                    <div style="display:flex;align-items:center;gap:9px;">
+                      <span style="width:30px;height:30px;border-radius:9px;background:{{ o.avBg }};color:{{ o.avC }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;">{{ o.initial }}</span>
+                      <span style="font-size:13px;font-weight:600;color:#1B2A41;">{{ o.owner }}</span>
+                    </div>
+                    <span><span style="background:{{ o.sevBg }};color:{{ o.sev }};font-size:12px;font-weight:800;padding:5px 11px;border-radius:9px;">{{ o.since }}</span></span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ o.last }}</span>
+                    <div style="line-height:1.2;"><div style="font-size:14px;font-weight:800;color:{{ o.sev }};">{{ o.iqd }}</div><div style="font-size:11px;color:#6B7A90;">{{ o.usd }}</div></div>
+                    <div style="text-align:left;"><button onClick="{{ o.mark }}" style="font-size:12px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 12px;">نیشانکردنی پەیوەندی</button></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ scr_buildings }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1280px;">
+              <div style="display:flex;gap:12px;background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:14px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                <sc-for list="{{ buildings }}" as="b" hint-placeholder-count="3">
+                  <button onClick="{{ b.go }}" style="{{ b.style }}">عیمارە {{ b.id }}</button>
+                </sc-for>
+              </div>
+              <div style="display:grid;grid-template-columns:230px 1fr;gap:18px;align-items:start;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:12px;box-shadow:0 1px 2px rgba(27,42,65,.04);max-height:560px;overflow-y:auto;">
+                  <div style="font-size:12.5px;font-weight:700;color:#6B7A90;padding:6px 8px 10px;">٢٤ نهۆم</div>
+                  <sc-for list="{{ floors }}" as="fl" hint-placeholder-count="10">
+                    <div onClick="{{ fl.go }}" style="{{ fl.style }}">
+                      <span>{{ fl.label }}</span>
+                      <sc-if value="{{ fl.has }}"><span style="width:7px;height:7px;border-radius:50%;background:#2E9E6B;"></span></sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+                    <div style="font-size:16px;font-weight:800;color:#1B2A41;">شوقەکانی نهۆم {{ floor }} — عیمارە {{ building }}</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:14px;">
+                      <sc-for list="{{ legend }}" as="lg" hint-placeholder-count="5">
+                        <div style="display:flex;align-items:center;gap:6px;"><span style="width:11px;height:11px;border-radius:3px;background:{{ lg.c }};"></span><span style="font-size:11.5px;color:#6B7A90;font-weight:600;">{{ lg.l }}</span></div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+                    <sc-for list="{{ gridFlats }}" as="g" hint-placeholder-count="6">
+                      <button onClick="{{ g.go }}" style="text-align:right;background:{{ g.bg }};border:{{ g.ring }};border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;transition:transform .15s;" style-hover="transform:translateY(-2px)">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:16px;font-weight:800;color:#1B2A41;">{{ g.code }}</span>
+                          <sc-if value="{{ g.od }}"><span style="background:#D1495B;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;">دواکەوتوو</span></sc-if>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                          <span style="font-size:12px;color:#6B7A90;font-weight:600;">{{ g.area }}</span>
+                          <span style="font-size:12px;font-weight:700;color:{{ g.c }};">{{ g.label }}</span>
+                        </div>
+                        <div style="font-size:12px;color:#6B7A90;border-top:1px solid rgba(27,42,65,.06);padding-top:8px;">خاوەن: {{ g.owner }}</div>
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_flat }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1180px;">
+              <button onClick="{{ goBuildings }}" style="display:flex;align-items:center;gap:6px;color:#6B7A90;font-size:13px;font-weight:700;width:fit-content;">‹ گەڕانەوە بۆ شوقەکان</button>
+              <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:start;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:24px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+                    <div>
+                      <div style="display:flex;align-items:center;gap:12px;">
+                        <span style="font-size:30px;font-weight:900;color:#1B2A41;">{{ flat.code }}</span>
+                        <span style="background:{{ flat.statusBg }};color:{{ flat.statusC }};font-size:13px;font-weight:800;padding:6px 13px;border-radius:10px;">{{ flat.statusLabel }}</span>
+                      </div>
+                      <div style="display:flex;gap:18px;margin-top:12px;color:#6B7A90;font-size:13.5px;">
+                        <span>ڕووبەر: <b style="color:#1B2A41;">{{ flat.area }} م²</b></span>
+                        <span>عیمارە: <b style="color:#1B2A41;">{{ flat.b }}</b></span>
+                        <span>نهۆم: <b style="color:#1B2A41;">{{ flat.fl }}</b></span>
+                      </div>
+                    </div>
+                    <div style="text-align:left;background:{{ flat.balBg }};border-radius:14px;padding:14px 18px;">
+                      <div style="font-size:12px;color:#6B7A90;font-weight:600;">{{ flat.balWord }}</div>
+                      <div style="font-size:24px;font-weight:900;color:{{ flat.balC }};margin-top:3px;">{{ flat.balIqd }}</div>
+                      <div style="font-size:12px;color:{{ flat.balC }};opacity:.8;">{{ flat.balUsd }}</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:10px;margin-top:22px;">
+                    <button onClick="{{ openPayment }}" style="height:46px;padding:0 20px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 20px -10px rgba(46,158,107,.5);"><span style="font-size:18px;">+</span> تۆمارکردنی پارەدان</button>
+                    <button onClick="{{ openPayment }}" style="height:46px;padding:0 20px;border-radius:12px;background:#EAF4FC;color:#1577B8;font-weight:800;font-size:14px;border:1px solid #D3E7F8;">دروستکردنی پسوڵە</button>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:18px;">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:18px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                    <div style="font-size:12.5px;font-weight:700;color:#6B7A90;margin-bottom:12px;">خاوەن</div>
+                    <button onClick="{{ openFlatOwner }}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:right;">
+                      <span style="width:44px;height:44px;border-radius:13px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;">{{ flat.ownerInitial }}</span>
+                      <div style="flex:1;line-height:1.3;"><div style="font-size:14.5px;font-weight:700;color:#1B2A41;">{{ flat.ownerName }}</div><div style="font-size:12px;color:#6B7A90;">{{ flat.ownerMobile }}</div></div>
+                      <span style="color:#1E8FD5;font-size:18px;">›</span>
+                    </button>
+                  </div>
+                  <sc-if value="{{ flat.rented }}">
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:18px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                      <div style="font-size:12.5px;font-weight:700;color:#6B7A90;margin-bottom:12px;">کرێچی</div>
+                      <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div style="display:flex;align-items:center;gap:11px;"><span style="width:40px;height:40px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;display:flex;align-items:center;justify-content:center;font-weight:700;">{{ flat.tenant }}</span></div>
+                        <div style="text-align:left;"><div style="font-size:15px;font-weight:800;color:#1B2A41;">{{ flat.rentIqd }}</div><div style="font-size:12px;color:#2BB3C0;font-weight:700;">{{ flat.rentUsd }}</div></div>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:flex;gap:6px;padding:0 18px;border-bottom:1px solid #EEF2F7;">
+                  <sc-for list="{{ flatTabs }}" as="t" hint-placeholder-count="4">
+                    <div onClick="{{ t.go }}" style="{{ t.style }}">{{ t.label }}</div>
+                  </sc-for>
+                </div>
+                <div style="padding:22px;">
+                  <sc-if value="{{ ftab_bills }}">
+                    <div style="display:flex;flex-direction:column;gap:12px;">
+                      <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <div style="font-size:14px;font-weight:700;color:#1B2A41;">فاتورەی مانگی حوزەیران 2026</div>
+                        <button onClick="{{ openBill }}" style="font-size:12.5px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 13px;">+ دروستکردنی فاتورە</button>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:8px;">
+                        <sc-for list="{{ billBreak }}" as="bl" hint-placeholder-count="4">
+                          <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;background:#FAFBFD;border:1px solid #EEF2F7;border-radius:12px;">
+                            <span style="width:9px;height:9px;border-radius:50%;background:{{ bl.c }};"></span>
+                            <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ bl.label }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ bl.meta }}</div></div>
+                            <span style="font-size:14px;font-weight:800;color:#1B2A41;">{{ bl.iqd }}</span>
+                          </div>
+                        </sc-for>
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:15px;background:#1B2A41;border-radius:12px;color:#fff;margin-top:4px;">
+                          <span style="font-size:14px;font-weight:700;">کۆی فاتورە</span>
+                          <div style="text-align:left;"><div style="font-size:18px;font-weight:900;">{{ billTotalIqd }}</div><div style="font-size:12px;opacity:.85;">{{ billTotalUsd }}</div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ftab_payments }}">
+                    <div style="display:flex;flex-direction:column;">
+                      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:10px 8px;font-size:11.5px;color:#6B7A90;font-weight:700;border-bottom:1px solid #EEF2F7;">
+                        <span>بەروار</span><span>جۆر</span><span>بڕ</span><span style="text-align:left;">دۆخ</span>
+                      </div>
+                      <sc-for list="{{ flatPays }}" as="p" hint-placeholder-count="4">
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:13px 8px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                          <span style="font-size:13px;color:#6B7A90;">{{ p.date }}</span>
+                          <span><span style="background:{{ p.tagBg }};color:{{ p.tagC }};font-size:12px;font-weight:700;padding:3px 9px;border-radius:7px;">{{ p.type }}</span></span>
+                          <div style="line-height:1.2;"><div style="font-size:13.5px;font-weight:800;color:#1B2A41;">{{ p.iqd }}</div><div style="font-size:10.5px;color:#2BB3C0;">{{ p.usd }}</div></div>
+                          <span style="text-align:left;"><span style="color:#2E9E6B;font-size:12.5px;font-weight:700;">دراوە ✓</span></span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ftab_documents }}">
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+                      <sc-for list="{{ flatDocs }}" as="d" hint-placeholder-count="4">
+                        <div style="display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #EEF2F7;border-radius:12px;">
+                          <span style="width:42px;height:42px;border-radius:11px;background:{{ d.c }}1a;color:{{ d.c }};display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><polyline points="13 3 13 9 19 9"/></svg></span>
+                          <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ d.name }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ d.cat }}</div></div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ftab_ownership }}">
+                    <div style="position:relative;padding-right:22px;">
+                      <div style="position:absolute;right:5px;top:6px;bottom:6px;width:2px;background:#E3E9F2;"></div>
+                      <sc-for list="{{ ownership }}" as="o" hint-placeholder-count="2">
+                        <div style="position:relative;padding-bottom:22px;">
+                          <span style="position:absolute;right:-21.5px;top:3px;width:13px;height:13px;border-radius:50%;background:{{ ownerDot }};border:3px solid #fff;box-shadow:0 0 0 2px #E3E9F2;"></span>
+                          <div style="background:#FAFBFD;border:1px solid #EEF2F7;border-radius:12px;padding:14px 16px;">
+                            <div style="display:flex;align-items:center;justify-content:space-between;">
+                              <div style="font-size:14px;font-weight:800;color:#1B2A41;">{{ o.from }} ← {{ o.to }}</div>
+                              <span style="font-size:12px;color:#6B7A90;">{{ o.date }}</span>
+                            </div>
+                            <div style="display:flex;gap:16px;margin-top:8px;font-size:12.5px;color:#6B7A90;">
+                              <span>نرخ: <b style="color:#1B2A41;">{{ o.price }}</b></span>
+                              <span>بەڵگەنامە: <b style="color:#1577B8;">{{ o.doc }}</b></span>
+                            </div>
+                          </div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_owners }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="flex:1;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #E3E9F2;border-radius:12px;height:46px;padding:0 14px;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+                  <input placeholder="گەڕان بە ناو یان مۆبایل…" style="border:none;outline:none;flex:1;font-size:14px;background:none;"/>
+                </div>
+                <button style="height:46px;padding:0 20px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ زیادکردنی خاوەن</button>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:2fr 1.3fr 1fr 1.2fr 40px;gap:12px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>ناو</span><span>مۆبایل</span><span>ژمارەی شوقە</span><span>کۆی قەرز</span><span></span>
+                </div>
+                <sc-for list="{{ ownersList }}" as="o" hint-placeholder-count="7">
+                  <button onClick="{{ o.go }}" style="display:grid;grid-template-columns:2fr 1.3fr 1fr 1.2fr 40px;gap:12px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;width:100%;text-align:right;transition:background .15s;" style-hover="background:#FAFBFD">
+                    <div style="display:flex;align-items:center;gap:11px;"><span style="width:38px;height:38px;border-radius:11px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">{{ o.initial }}</span><span style="font-size:14px;font-weight:700;color:#1B2A41;">{{ o.name }}</span></div>
+                    <span style="font-size:13px;color:#6B7A90;">{{ o.mobile }}</span>
+                    <span style="font-size:14px;font-weight:700;color:#1B2A41;">{{ o.count }}</span>
+                    <div><span style="background:{{ o.debtBg }};color:{{ o.debtC }};font-size:12.5px;font-weight:800;padding:5px 11px;border-radius:9px;">{{ o.debtIqd }}</span></div>
+                    <span style="color:#C2CCDA;font-size:18px;text-align:left;">›</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_ownerProfile }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <button onClick="{{ goOwners }}" style="display:flex;align-items:center;gap:6px;color:#6B7A90;font-size:13px;font-weight:700;width:fit-content;">‹ گەڕانەوە بۆ خاوەنەکان</button>
+              <div style="display:grid;grid-template-columns:1fr 2fr;gap:18px;align-items:start;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:24px;box-shadow:0 1px 2px rgba(27,42,65,.04);display:flex;flex-direction:column;align-items:center;text-align:center;">
+                  <span style="width:72px;height:72px;border-radius:20px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;">{{ ownerDetail.initial }}</span>
+                  <div style="font-size:18px;font-weight:800;color:#1B2A41;margin-top:14px;">{{ ownerDetail.name }}</div>
+                  <div style="font-size:13px;color:#6B7A90;margin-top:3px;">{{ ownerDetail.mobile }}</div>
+                  <div style="display:flex;gap:10px;width:100%;margin-top:20px;">
+                    <div style="flex:1;background:#E8F6EF;border-radius:12px;padding:12px;"><div style="font-size:11px;color:#1f8a5b;font-weight:600;">کۆی دراوە</div><div style="font-size:15px;font-weight:800;color:#2E9E6B;margin-top:3px;">{{ ownerDetail.paidIqd }}</div></div>
+                    <div style="flex:1;background:#FCEDEF;border-radius:12px;padding:12px;"><div style="font-size:11px;color:#b23a4a;font-weight:600;">کۆی قەرز</div><div style="font-size:15px;font-weight:800;color:{{ ownerDetail.debtC }};margin-top:3px;">{{ ownerDetail.debtIqd }}</div></div>
+                  </div>
+                  <button style="margin-top:16px;width:100%;height:42px;border-radius:11px;background:#EAF4FC;color:#1577B8;font-weight:700;font-size:13px;border:1px solid #D3E7F8;">بەڵگەنامەکانی خاوەن</button>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="font-size:15px;font-weight:800;color:#1B2A41;margin-bottom:14px;">شوقەکانی خاوەن ({{ ownerDetail.count }})</div>
+                  <div style="display:flex;flex-direction:column;gap:10px;">
+                    <sc-for list="{{ opFlats }}" as="f" hint-placeholder-count="2">
+                      <button onClick="{{ f.go }}" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #EEF2F7;border-radius:12px;width:100%;text-align:right;transition:background .15s;" style-hover="background:#FAFBFD">
+                        <span style="font-size:15px;font-weight:800;color:#1577B8;">{{ f.code }}</span>
+                        <span style="font-size:12.5px;color:#6B7A90;">{{ f.area }}</span>
+                        <span style="background:{{ f.bg }};color:{{ f.c }};font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px;">{{ f.label }}</span>
+                        <span style="flex:1;"></span>
+                        <sc-if value="{{ f.od }}"><span style="font-size:13px;font-weight:800;color:#D1495B;">{{ f.balIqd }}</span></sc-if>
+                        <span style="color:#C2CCDA;font-size:18px;">›</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_rent }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1200px;">
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:.9fr 1.2fr 1.1fr 1.1fr 1fr .9fr 1.3fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>کۆد</span><span>خاوەن / کۆمپانیا</span><span>کرێچی</span><span>نرخی کرێ</span><span>ماوەی گرێبەست</span><span>ڕۆژی پارەدان</span><span style="text-align:left;">دۆخ / کردار</span>
+                </div>
+                <sc-for list="{{ rentRows }}" as="r" hint-placeholder-count="6">
+                  <div style="display:grid;grid-template-columns:.9fr 1.2fr 1.1fr 1.1fr 1fr .9fr 1.3fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <button onClick="{{ r.go }}" style="font-size:14px;font-weight:800;color:#1577B8;text-align:right;">{{ r.code }}</button>
+                    <span style="font-size:13px;color:#1B2A41;font-weight:600;">{{ r.owner }}</span>
+                    <span style="font-size:13px;color:#6B7A90;">{{ r.tenant }}</span>
+                    <div style="line-height:1.2;white-space:nowrap;"><div style="font-size:13.5px;font-weight:800;color:#1B2A41;">{{ r.rentIqd }}</div><div style="font-size:10.5px;color:#2BB3C0;">{{ r.rentUsd }}</div></div>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ r.contract }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ r.payDay }}</span>
+                    <div style="display:flex;align-items:center;justify-content:flex-end;gap:9px;">
+                      <span style="background:{{ r.statusBg }};color:{{ r.statusC }};font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:8px;">{{ r.statusLabel }}</span>
+                      <button onClick="{{ openPayment }}" style="font-size:11.5px;font-weight:700;color:#fff;background:#2E9E6B;border-radius:8px;padding:6px 11px;">+ کرێ</button>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_bills }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1200px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                  <span style="font-size:14px;font-weight:700;color:#1B2A41;">فاتورەی مانگی حوزەیران 2026</span>
+                  <span style="display:flex;align-items:center;gap:6px;background:#FBF3DA;color:#A57C00;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:9px;"><span style="width:7px;height:7px;border-radius:50%;background:#E0A100;"></span>کارەبا و ئاو: مەتر · گاز و خزمەتگوزاری: جێگیر</span>
+                </div>
+                <button onClick="{{ openBill }}" style="height:42px;padding:0 18px;border-radius:11px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13.5px;">+ دروستکردنی فاتورەی مانگانە</button>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:1fr 1.1fr 1fr 1fr 1.1fr 1.2fr 1fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>شوقە</span><span>کارەبا 🔌</span><span>ئاو 💧</span><span>گاز</span><span>خزمەتگوزاری</span><span>کۆی فاتورە</span><span style="text-align:left;">دۆخ</span>
+                </div>
+                <sc-for list="{{ billRows }}" as="b" hint-placeholder-count="6">
+                  <div style="display:grid;grid-template-columns:1fr 1.1fr 1fr 1fr 1.1fr 1.2fr 1fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <span style="font-size:14px;font-weight:800;color:#1B2A41;">{{ b.code }}</span>
+                    <span style="font-size:12.5px;color:#1B2A41;">{{ b.elec }}</span>
+                    <span style="font-size:12.5px;color:#1B2A41;">{{ b.water }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ b.gas }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ b.serv }}</span>
+                    <div style="line-height:1.2;"><div style="font-size:13.5px;font-weight:800;color:#1B2A41;">{{ b.total }}</div><div style="font-size:10.5px;color:#2BB3C0;">{{ b.totalUsd }}</div></div>
+                    <span style="text-align:left;"><span style="background:{{ b.statusBg }};color:{{ b.statusC }};font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:8px;">{{ b.statusLabel }}</span></span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_payments }}">
+            <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:start;max-width:1200px;">
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                <div style="font-size:16px;font-weight:800;color:#1B2A41;margin-bottom:18px;">تۆمارکردنی پارەدان</div>
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                  <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">شوقە / خاوەن</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:13.5px;font-weight:600;">B1-12-4 · ئاکۆ مەحمود <span style="color:#6B7A90;">▾</span></div></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆر</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:13.5px;font-weight:600;">فاتورە <span style="color:#6B7A90;">▾</span></div></div>
+                    <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆری پارە</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:13.5px;font-weight:600;">دینار (د.ع) <span style="color:#6B7A90;">▾</span></div></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">بڕی پارە</label><input value="440,000" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:15px;font-weight:700;outline:none;"/></div>
+                    <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">بەروار</label><input value="2026-06-16" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+                  </div>
+                  <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">تێبینی</label><input placeholder="تێبینی…" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+                  <button onClick="{{ confirmPayment }}" style="height:48px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:15px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);margin-top:4px;">پاشەکەوت و دروستکردنی پسوڵە</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #EEF2F7;">
+                  <span style="font-size:15px;font-weight:800;color:#1B2A41;">دوایین پسوڵەکان</span>
+                </div>
+                <sc-for list="{{ receipts }}" as="r" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #F4F7FB;">
+                    <span style="width:42px;height:42px;border-radius:12px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-1.8L13 21l-1-1.4L11 21 9 19.2 6 21z"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="13" y2="12"/></svg></span>
+                    <div style="flex:1;line-height:1.3;">
+                      <div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ r.code }} · {{ r.owner }}</div>
+                      <div style="font-size:11.5px;color:#6B7A90;">#{{ r.id }} · {{ r.date }} · <span style="color:{{ r.tagC }};font-weight:700;">{{ r.type }}</span></div>
+                    </div>
+                    <div style="text-align:left;line-height:1.2;white-space:nowrap;"><div style="font-size:13.5px;font-weight:800;color:#1B2A41;">{{ r.iqd }}</div><div style="font-size:10.5px;color:#2BB3C0;">{{ r.usd }}</div></div>
+                    <button onClick="{{ confirmPayment }}" style="width:36px;height:36px;border-radius:10px;background:#F4F7FB;color:#1577B8;display:flex;align-items:center;justify-content:center;" title="چاپ"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_documents }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1200px;">
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <div style="flex:1;min-width:240px;display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #E3E9F2;border-radius:12px;height:46px;padding:0 14px;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
+                  <input placeholder="گەڕان لە بەڵگەنامەکان…" style="border:none;outline:none;flex:1;font-size:14px;background:none;"/>
+                </div>
+                <div style="display:flex;gap:7px;flex-wrap:wrap;">
+                  <span style="font-size:12.5px;font-weight:700;background:#1B2A41;color:#fff;padding:9px 14px;border-radius:9px;">هەموو</span>
+                  <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">گرێبەست</span>
+                  <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">ناسنامە</span>
+                  <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">پسوڵە</span>
+                  <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">خاوەندارێتی</span>
+                </div>
+                <button onClick="{{ openUpload }}" style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13.5px;">+ بارکردنی بەڵگەنامە</button>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+                <sc-for list="{{ docVault }}" as="d" hint-placeholder-count="8">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                    <div style="height:120px;background:repeating-linear-gradient(135deg,#F4F7FB,#F4F7FB 10px,#EDF2F8 10px,#EDF2F8 20px);display:flex;align-items:center;justify-content:center;position:relative;">
+                      <span style="width:46px;height:46px;border-radius:12px;background:{{ d.c }}1f;color:{{ d.c }};display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><polyline points="13 3 13 9 19 9"/></svg></span>
+                      <span style="position:absolute;top:10px;right:10px;background:{{ d.c }};color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;">{{ d.cat }}</span>
+                    </div>
+                    <div style="padding:13px 14px;">
+                      <div style="font-size:13px;font-weight:700;color:#1B2A41;line-height:1.3;">{{ d.name }}</div>
+                      <div style="font-size:11px;color:#6B7A90;margin-top:4px;">{{ d.meta }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_expenses }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1200px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div style="display:flex;gap:14px;">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 20px;min-width:200px;"><div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی خەرجی ئەم مانگە</div><div style="font-size:24px;font-weight:900;color:#D1495B;margin-top:4px;">{{ expenseTotalIqd }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ expenseTotalUsd }}</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
+                  <button onClick="{{ exportExpenses }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
+                  <button onClick="{{ openExpense }}" style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی خەرجی</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:.9fr 1.8fr 1.2fr .9fr 1fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>جۆر</span><span>خەرجی</span><span>وەرگر</span><span>بەروار</span><span style="text-align:left;">بڕی پارە</span>
+                </div>
+                <sc-for list="{{ expenseRows }}" as="e" hint-placeholder-count="4">
+                  <div style="display:grid;grid-template-columns:.9fr 1.8fr 1.2fr .9fr 1fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <span><span style="background:{{ e.mainBg }};color:{{ e.mainC }};font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:8px;">{{ e.main }}</span></span>
+                    <span style="font-size:13.5px;font-weight:600;color:#1B2A41;">{{ e.sub }}</span>
+                    <span style="font-size:13px;color:#6B7A90;">{{ e.to }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ e.date }}</span>
+                    <div style="text-align:left;line-height:1.2;"><div style="font-size:14px;font-weight:800;color:#D1495B;">{{ e.iqd }}</div><div style="font-size:10.5px;color:#6B7A90;">{{ e.usd }}</div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:15px 20px;border-bottom:1px solid #EEF2F7;"><span style="font-size:15px;font-weight:800;color:#1B2A41;">دابینکەرەکان <span style="font-size:12px;color:#6B7A90;font-weight:600;">(المجهزون)</span></span><button style="font-size:12.5px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 13px;">+ دابینکەری نوێ</button></div>
+                <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid #F4F7FB;">
+                    <span style="width:38px;height:38px;border-radius:11px;background:#F0EAFB;color:#7A5BC0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">{{ s.initial }}</span>
+                    <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ s.name }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ s.sup }} · {{ s.phone }}</div></div>
+                    <span style="font-size:13px;font-weight:800;color:#1B2A41;">{{ s.iqd }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_cashbox }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;">
+                <div style="background:linear-gradient(135deg,#1B2A41,#2A3F5F);border-radius:16px;padding:22px;color:#fff;box-shadow:0 10px 26px -12px rgba(27,42,65,.5);">
+                  <div style="font-size:13px;opacity:.85;font-weight:600;">باڵانسی صندوق</div>
+                  <div style="font-size:30px;font-weight:900;margin-top:8px;">{{ cashBalanceIqd }}</div>
+                  <div style="font-size:13px;color:#7FD0E0;font-weight:700;margin-top:4px;">≈ {{ cashBalanceUsd }}</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="width:30px;height:30px;border-radius:9px;background:#E8F6EF;color:#2E9E6B;display:flex;align-items:center;justify-content:center;font-weight:800;">↓</span><span style="font-size:12.5px;color:#6B7A90;font-weight:600;">داهات ئەم مانگە</span></div>
+                  <div style="font-size:22px;font-weight:900;color:#2E9E6B;margin-top:8px;">{{ incomeIqd }}</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;">
+                  <div style="display:flex;align-items:center;gap:8px;"><span style="width:30px;height:30px;border-radius:9px;background:#FCEDEF;color:#D1495B;display:flex;align-items:center;justify-content:center;font-weight:800;">↑</span><span style="font-size:12.5px;color:#6B7A90;font-weight:600;">خەرجی ئەم مانگە</span></div>
+                  <div style="font-size:22px;font-weight:900;color:#D1495B;margin-top:8px;">{{ expenseSumIqd }}</div>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="padding:16px 20px;border-bottom:1px solid #EEF2F7;font-size:15px;font-weight:800;color:#1B2A41;">دەفتەری پارە (داهات / خەرجی)</div>
+                <sc-for list="{{ ledger }}" as="l" hint-placeholder-count="5">
+                  <div style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #F4F7FB;">
+                    <span style="width:38px;height:38px;border-radius:11px;background:{{ l.bg }};color:{{ l.c }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">{{ l.sign }}</span>
+                    <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ l.label }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ l.date }}</div></div>
+                    <span style="font-size:14.5px;font-weight:800;color:{{ l.c }};">{{ l.sign }} {{ l.iqd }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_reports }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;">
+              <sc-for list="{{ reports }}" as="r" hint-placeholder-count="4">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                    <div><div style="font-size:15px;font-weight:800;color:#1B2A41;">{{ r.title }}</div><div style="font-size:12px;color:#6B7A90;margin-top:3px;">{{ r.sub }}</div></div>
+                    <button style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#2E9E6B;background:#E8F6EF;border-radius:9px;padding:7px 12px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Excel</button>
+                  </div>
+                  <div style="display:flex;align-items:flex-end;gap:10px;height:96px;margin-top:20px;">
+                    <sc-for list="{{ r.bars }}" as="bar" hint-placeholder-count="6">
+                      <div style="flex:1;border-radius:7px 7px 0 0;background:{{ r.c }};height:{{ bar }}%;opacity:.85;"></div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_settings }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;align-items:start;">
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                <div style="font-size:15px;font-weight:800;color:#1B2A41;margin-bottom:16px;">نرخی دۆلار</div>
+                <label style="font-size:12.5px;font-weight:700;color:#6B7A90;">$1 = چەند دینار</label>
+                <div style="display:flex;gap:10px;margin-top:8px;">
+                  <input value="{{ rateStr }}" style="flex:1;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:16px;font-weight:800;outline:none;"/>
+                  <button style="height:46px;padding:0 20px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">پاشەکەوت</button>
+                </div>
+                <div style="margin-top:14px;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:11px;padding:12px 14px;font-size:12.5px;color:#1577B8;">گۆڕینی ئەم نرخە کاریگەری دەکاتە سەر هەموو بەهای دۆلار لە سیستەمدا.</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);">
+                <div style="font-size:15px;font-weight:800;color:#1B2A41;margin-bottom:16px;">پاشەکەوتی داتابەیس</div>
+                <div style="display:flex;align-items:center;gap:12px;background:#FAFBFD;border:1px solid #EEF2F7;border-radius:12px;padding:14px;">
+                  <span style="width:40px;height:40px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+                  <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">دوایین پاشەکەوت</div><div style="font-size:11.5px;color:#6B7A90;">2026-06-15 · 23:00</div></div>
+                  <button style="height:40px;padding:0 16px;border-radius:10px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">پاشەکەوت ئێستا</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(27,42,65,.04);grid-column:span 2;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-size:15px;font-weight:800;color:#1B2A41;">بەکارهێنەران</span><button style="font-size:12.5px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 13px;">+ بەکارهێنەری نوێ</button></div>
+                <sc-for list="{{ usersList }}" as="u" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #F4F7FB;">
+                    <span style="width:38px;height:38px;border-radius:11px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">{{ u.initial }}</span>
+                    <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ u.name }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ u.user }}</div></div>
+                    <span style="background:{{ u.roleBg }};color:{{ u.roleC }};font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:8px;">{{ u.role }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_mortgage }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1280px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                <div style="font-size:16px;font-weight:800;color:#1B2A41;">قیست — مۆرگەجی شوقەکان</div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <button onClick="{{ doPrint }}" style="height:42px;padding:0 15px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
+                  <button onClick="{{ exportMortgage }}" style="height:42px;padding:0 15px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+                <div style="background:linear-gradient(135deg,#1B2A41,#2A3F5F);border-radius:16px;padding:20px;color:#fff;box-shadow:0 10px 26px -12px rgba(27,42,65,.5);">
+                  <div style="font-size:12.5px;opacity:.85;font-weight:600;">کۆی نرخی فرۆشتن</div>
+                  <div style="font-size:26px;font-weight:900;margin-top:6px;">{{ mortgageSummary.totalUsd }}</div>
+                  <div style="font-size:12px;color:#7FD0E0;font-weight:700;margin-top:3px;">≈ {{ mortgageSummary.totalIqd }}</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;">
+                  <div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی وەرگیراو</div>
+                  <div style="font-size:24px;font-weight:900;color:#2E9E6B;margin-top:6px;">{{ mortgageSummary.paidUsd }}</div>
+                  <div style="font-size:11.5px;color:#6B7A90;">≈ {{ mortgageSummary.paidIqd }}</div>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;">
+                  <div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی ماوە (قەرز)</div>
+                  <div style="font-size:24px;font-weight:900;color:#D1495B;margin-top:6px;">{{ mortgageSummary.remUsd }}</div>
+                  <div style="font-size:11.5px;color:#6B7A90;">≈ {{ mortgageSummary.remIqd }}</div>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:18px;align-items:start;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                  <div style="padding:15px 20px;border-bottom:1px solid #EEF2F7;font-size:15px;font-weight:800;color:#1B2A41;">حساباتی قیست — مۆرگەجی شوقەکان</div>
+                  <div style="display:grid;grid-template-columns:.8fr 1.4fr 1fr 1.4fr .9fr;gap:10px;padding:12px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                    <span>شوقە</span><span>کڕیار</span><span>کۆی نرخ</span><span>پێشکەوتن</span><span style="text-align:left;">دۆخ</span>
+                  </div>
+                  <sc-for list="{{ mortgages }}" as="m" hint-placeholder-count="4">
+                    <div style="display:grid;grid-template-columns:.8fr 1.4fr 1fr 1.4fr .9fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                      <span style="font-size:13px;font-weight:800;color:#1577B8;">{{ m.code }}</span>
+                      <span style="font-size:13px;font-weight:600;color:#1B2A41;">{{ m.buyer }}</span>
+                      <div style="line-height:1.2;"><div style="font-size:13px;font-weight:800;color:#1B2A41;">{{ m.totalUsd }}</div><div style="font-size:10px;color:#6B7A90;">ماوە {{ m.remUsd }}</div></div>
+                      <div>
+                        <div style="height:8px;background:#EEF2F7;border-radius:6px;overflow:hidden;"><div style="height:100%;width:{{ m.pct }};background:{{ m.barC }};border-radius:6px;"></div></div>
+                        <div style="font-size:10.5px;color:#6B7A90;margin-top:4px;">{{ m.pct }} · {{ m.term }}</div>
+                      </div>
+                      <span style="text-align:left;"><span style="background:{{ m.statusBg }};color:{{ m.statusC }};font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;">{{ m.statusLabel }}</span></span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                  <div style="padding:15px 20px;border-bottom:1px solid #EEF2F7;font-size:14px;font-weight:800;color:#1B2A41;">مێژووی پارەدانی قیست</div>
+                  <sc-for list="{{ mortgageHistory }}" as="h" hint-placeholder-count="5">
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid #F4F7FB;">
+                      <span style="width:38px;height:34px;border-radius:10px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;">{{ h.n }}</span>
+                      <div style="flex:1;line-height:1.3;"><div style="font-size:13px;font-weight:700;color:#1B2A41;">{{ h.code }}</div><div style="font-size:11px;color:#6B7A90;">{{ h.date }}</div></div>
+                      <span style="font-size:13.5px;font-weight:800;color:#2E9E6B;">{{ h.amtUsd }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_items }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 20px;min-width:220px;"><div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی فرۆشتنی کاڵا ئەم مانگە</div><div style="font-size:24px;font-weight:900;color:#1B2A41;margin-top:4px;">{{ itemsTotal }}</div></div>
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
+                  <button onClick="{{ exportItems }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
+                  <button style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی کاڵا</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:1.8fr .9fr 1fr .6fr 1fr 1fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>کاڵا</span><span>شوقە</span><span>بەهای یەکە</span><span>بڕ</span><span>کۆ</span><span style="text-align:left;">دۆخ</span>
+                </div>
+                <sc-for list="{{ itemsRows }}" as="it" hint-placeholder-count="4">
+                  <div style="display:grid;grid-template-columns:1.8fr .9fr 1fr .6fr 1fr 1fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <span style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ it.name }}</span>
+                    <span style="font-size:13px;font-weight:800;color:#1577B8;">{{ it.code }}</span>
+                    <span style="font-size:13px;color:#6B7A90;">{{ it.unit }}</span>
+                    <span style="font-size:13px;color:#6B7A90;">{{ it.qty }}</span>
+                    <div style="line-height:1.2;"><div style="font-size:13.5px;font-weight:800;color:#1B2A41;">{{ it.total }}</div><div style="font-size:10px;color:#6B7A90;">{{ it.totalUsd }}</div></div>
+                    <span style="text-align:left;"><span style="background:{{ it.statusBg }};color:{{ it.statusC }};font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;">{{ it.statusLabel }}</span></span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_income }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 20px;min-width:240px;"><div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی داهاتی جۆراوجۆر ئەم مانگە</div><div style="font-size:24px;font-weight:900;color:#2E9E6B;margin-top:4px;">{{ incomeTotal }}</div></div>
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
+                  <button onClick="{{ exportIncome }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
+                  <button style="height:46px;padding:0 18px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی داهات</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:1.3fr 1.3fr .9fr 1.2fr 1fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>جۆری داهات</span><span>سەرچاوە</span><span>بەروار</span><span>تێبینی</span><span style="text-align:left;">بڕی پارە</span>
+                </div>
+                <sc-for list="{{ incomeRows }}" as="r" hint-placeholder-count="4">
+                  <div style="display:grid;grid-template-columns:1.3fr 1.3fr .9fr 1.2fr 1fr;gap:10px;padding:14px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <span style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ r.type }}</span>
+                    <span style="font-size:13px;color:#6B7A90;">{{ r.src }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ r.date }}</span>
+                    <span style="font-size:12.5px;color:#6B7A90;">{{ r.note }}</span>
+                    <div style="text-align:left;line-height:1.2;"><div style="font-size:14px;font-weight:800;color:#2E9E6B;">{{ r.iqd }}</div><div style="font-size:10px;color:#6B7A90;">{{ r.usd }}</div></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_statement }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1080px;">
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(27,42,65,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <span style="min-width:54px;height:46px;padding:0 10px;border-radius:13px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">{{ statementFlat.code }}</span>
+                  <div style="line-height:1.3;"><div style="font-size:16px;font-weight:800;color:#1B2A41;">کەشف حساب — {{ statementFlat.code }}</div><div style="font-size:12.5px;color:#6B7A90;">خاوەن: {{ statementFlat.owner }}</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;">
+                  <div style="text-align:left;line-height:1.2;"><span style="font-size:11.5px;color:#6B7A90;">باڵانسی کۆتایی</span><div style="font-size:20px;font-weight:900;color:{{ statementFlat.balC }};">{{ statementBal }}</div></div>
+                  <button onClick="{{ exportStatement }}" style="height:42px;padding:0 14px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Excel</button>
+                  <button onClick="{{ doPrint }}" style="height:42px;padding:0 16px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپکردن</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:.9fr 2fr .9fr 1fr 1fr 1.1fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>بەروار</span><span>وەسف</span><span>جۆر</span><span>چارج</span><span>پارەدان</span><span style="text-align:left;">باڵانس</span>
+                </div>
+                <sc-for list="{{ statementRows }}" as="s" hint-placeholder-count="6">
+                  <div style="display:grid;grid-template-columns:.9fr 2fr .9fr 1fr 1fr 1.1fr;gap:10px;padding:13px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <span style="font-size:12px;color:#6B7A90;">{{ s.date }}</span>
+                    <span style="font-size:13px;font-weight:600;color:#1B2A41;">{{ s.desc }}</span>
+                    <span><span style="background:{{ s.tagBg }};color:{{ s.tagC }};font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:7px;">{{ s.type }}</span></span>
+                    <span style="font-size:12.5px;color:#D1495B;font-weight:700;">{{ s.debit }}</span>
+                    <span style="font-size:12.5px;color:#2E9E6B;font-weight:700;">{{ s.credit }}</span>
+                    <span style="text-align:left;font-size:13px;font-weight:800;color:#1B2A41;">{{ s.bal }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ scr_employees }}">
+            <div style="display:flex;flex-direction:column;gap:18px;max-width:1100px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div style="display:flex;gap:14px;flex-wrap:wrap;">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 20px;"><div style="font-size:12.5px;color:#6B7A90;font-weight:600;">کۆی مووچەی مانگانە</div><div style="font-size:24px;font-weight:900;color:#D1495B;margin-top:4px;">{{ empTotal }}</div><div style="font-size:11px;color:#6B7A90;">وەک خەرجی دادەنرێت</div></div>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 20px;"><div style="font-size:12.5px;color:#6B7A90;font-weight:600;">ژمارەی کارمەندان</div><div style="font-size:24px;font-weight:900;color:#1B2A41;margin-top:4px;">{{ empCount }}</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <button onClick="{{ doPrint }}" style="height:42px;padding:0 15px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپ / PDF</button>
+                  <button onClick="{{ exportEmp }}" style="height:42px;padding:0 15px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;display:flex;align-items:center;gap:6px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Excel</button>
+                  <button style="height:42px;padding:0 16px;border-radius:11px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13px;">+ کارمەندی نوێ</button>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(27,42,65,.04);overflow:hidden;">
+                <div style="display:grid;grid-template-columns:2fr 1.6fr 1.2fr;gap:10px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
+                  <span>کارمەند</span><span>پۆست</span><span style="text-align:left;">مووچەی مانگانە</span>
+                </div>
+                <sc-for list="{{ employees }}" as="e" hint-placeholder-count="6">
+                  <div style="display:grid;grid-template-columns:2fr 1.6fr 1.2fr;gap:10px;padding:13px 20px;border-bottom:1px solid #F4F7FB;align-items:center;">
+                    <div style="display:flex;align-items:center;gap:11px;"><span style="width:36px;height:36px;border-radius:11px;background:{{ e.avBg }};color:{{ e.avC }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">{{ e.initial }}</span><span style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ e.name }}</span></div>
+                    <span style="font-size:13px;color:#6B7A90;">{{ e.role }}</span>
+                    <div style="text-align:left;line-height:1.2;"><div style="font-size:14px;font-weight:800;color:#1B2A41;">{{ e.iqd }}</div><div style="font-size:10px;color:#6B7A90;">{{ e.usd }}</div></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showStaffLogin }}">
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 600px at 70% -10%, #EAF4FC, #F4F7FB 60%);padding:24px;">
+      <div style="width:400px;background:#fff;border:1px solid #E3E9F2;border-radius:22px;padding:34px 32px;box-shadow:0 24px 60px -24px rgba(27,42,65,.25);animation:pop .35s ease;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px;">
+          <svg width="52" height="52" viewBox="0 0 48 48" fill="none"><path d="M4 24 C12 13, 36 13, 44 24 C36 35, 12 35, 4 24 Z" fill="#EAF4FC" stroke="#1E8FD5" stroke-width="2.6"/><circle cx="24" cy="24" r="7.6" fill="#1E8FD5"/><circle cx="21" cy="21" r="2.4" fill="#fff"/></svg>
+          <div style="font-size:20px;font-weight:800;color:#1B2A41;">{{ cityName }}</div>
+          <div style="font-size:12px;color:#6B7A90;">سیستەمی بەڕێوەبردنی خانووبەرە</div>
+        </div>
+        <label style="font-size:12.5px;font-weight:700;color:#1B2A41;">ناوی بەکارهێنەر</label>
+        <div style="margin:7px 0 16px;"><input value="hersh.acc" style="width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;padding:0 14px;font-size:14px;background:#FAFBFD;outline:none;"/></div>
+        <label style="font-size:12.5px;font-weight:700;color:#1B2A41;">وشەی نهێنی</label>
+        <div style="margin:7px 0 22px;"><input type="password" value="123456" style="width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;padding:0 14px;font-size:14px;background:#FAFBFD;outline:none;"/></div>
+        <button onClick="{{ staffLogin }}" style="width:100%;height:48px;border-radius:12px;background:#1E8FD5;color:#fff;font-size:15px;font-weight:800;box-shadow:0 10px 22px -10px rgba(30,143,213,.6);">چوونەژوورەوە</button>
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;font-size:12.5px;color:#6B7A90;">
+          <span>وەک:</span>
+          <button onClick="{{ staffLogin }}" style="color:#1E8FD5;font-weight:700;">ستاف</button>
+          <span style="color:#D4DCE8;">|</span>
+          <button onClick="{{ toOwner }}" style="color:#1E8FD5;font-weight:700;">خاوەن</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showOwnerApp }}">
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;background:#E7ECF3;padding:20px;overflow:auto;">
+      <div style="width:392px;height:812px;background:#0E1726;border-radius:46px;box-shadow:0 36px 80px -24px rgba(27,42,65,.5);padding:11px;position:relative;flex-shrink:0;">
+        <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0E1726;border-radius:14px;z-index:10;"></div>
+        <div style="width:100%;height:100%;border-radius:36px;overflow:hidden;background:#F4F7FB;display:flex;flex-direction:column;position:relative;">
+          <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:13px;font-weight:700;color:{{ phoneStatusColor }};flex-shrink:0;z-index:6;">
+            <span>9:41</span>
+            <span style="display:flex;gap:5px;align-items:center;"><svg width="17" height="11" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="5" y="4" width="3" height="8" rx="1"/><rect x="10" y="1.5" width="3" height="10.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".4"/></svg><svg width="22" height="11" viewBox="0 0 24 12" fill="none"><rect x="1" y="1" width="19" height="10" rx="3" stroke="currentColor" stroke-width="1.3" opacity=".5"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><rect x="21" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg></span>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;min-height:0;">
+
+            <sc-if value="{{ oscr_home }}">
+              <div>
+                <div style="background:linear-gradient(140deg,#1E8FD5,#2BB3C0);padding:6px 20px 54px;color:#fff;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div>
+                      <div style="font-size:13px;opacity:.92;">بەخێربێیت 👋</div>
+                      <div style="font-size:22px;font-weight:800;margin-top:2px;">ئاکۆ مەحمود</div>
+                    </div>
+                    <div style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;backdrop-filter:blur(4px);">ئـ</div>
+                  </div>
+                </div>
+                <div style="padding:0 16px 20px;margin-top:-38px;display:flex;flex-direction:column;gap:14px;">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:18px;padding:18px;box-shadow:0 12px 30px -16px rgba(27,42,65,.25);">
+                    <div style="font-size:13px;color:#6B7A90;font-weight:600;">کۆی قەرزی ئێستا</div>
+                    <div style="font-size:30px;font-weight:900;color:#D1495B;margin-top:6px;line-height:1;">440,000 <span style="font-size:16px;color:#6B7A90;font-weight:700;">د.ع</span></div>
+                    <div style="font-size:13px;color:#2BB3C0;font-weight:700;margin-top:4px;">≈ $300</div>
+                    <div style="display:flex;gap:10px;margin-top:16px;">
+                      <div style="flex:1;background:#F4F7FB;border-radius:12px;padding:11px 13px;"><div style="font-size:11px;color:#6B7A90;">ژمارەی شوقەکان</div><div style="font-size:18px;font-weight:800;color:#1B2A41;">2</div></div>
+                      <div style="flex:1;background:#FBF3DA;border-radius:12px;padding:11px 13px;"><div style="font-size:11px;color:#A57C00;">دۆخی گشتی</div><div style="font-size:14px;font-weight:800;color:#E0A100;margin-top:3px;">دواکەوتوو ⚠</div></div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:11px;">
+                    <button onClick="{{ goOwnerFlats }}" style="flex:1;background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:15px;display:flex;flex-direction:column;align-items:center;gap:7px;">
+                      <span style="width:38px;height:38px;border-radius:11px;background:#EAF4FC;color:#1E8FD5;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-7h6v7"/></svg></span>
+                      <span style="font-size:13px;font-weight:700;color:#1B2A41;">شوقەکانم</span>
+                    </button>
+                    <button onClick="{{ goOwnerPayments }}" style="flex:1;background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:15px;display:flex;flex-direction:column;align-items:center;gap:7px;">
+                      <span style="width:38px;height:38px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+                      <span style="font-size:13px;font-weight:700;color:#1B2A41;">پسوڵەکانم</span>
+                    </button>
+                  </div>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:16px 18px;">
+                    <div style="font-size:14px;font-weight:700;color:#1B2A41;margin-bottom:10px;">دوایین چالاکی</div>
+                    <sc-for list="{{ ownerActivity }}" as="a" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid #F4F7FB;">
+                        <span style="width:9px;height:9px;border-radius:50%;background:{{ a.dot }};"></span>
+                        <div style="flex:1;line-height:1.25;"><div style="font-size:13px;font-weight:600;color:#1B2A41;">{{ a.title }}</div><div style="font-size:11px;color:#6B7A90;">{{ a.date }}</div></div>
+                        <span style="font-size:13px;font-weight:800;color:#1B2A41;">{{ a.amt }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ oscr_flats }}">
+              <div style="padding:16px;">
+                <div style="font-size:18px;font-weight:800;color:#1B2A41;margin-bottom:14px;">شوقەکانم</div>
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <sc-for list="{{ myFlats }}" as="f" hint-placeholder-count="2">
+                    <button onClick="{{ f.go }}" style="text-align:right;background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:16px;box-shadow:0 2px 8px -4px rgba(27,42,65,.1);">
+                      <div style="display:flex;align-items:center;justify-content:space-between;">
+                        <span style="font-size:18px;font-weight:900;color:#1B2A41;">{{ f.code }}</span>
+                        <span style="background:{{ f.bg }};color:{{ f.c }};font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:8px;">{{ f.label }}</span>
+                      </div>
+                      <div style="font-size:12px;color:#6B7A90;margin-top:7px;text-align:right;">{{ f.sub }}</div>
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #F4F7FB;">
+                        <span style="background:{{ f.balBg }};color:{{ f.balC }};font-size:12.5px;font-weight:800;padding:5px 11px;border-radius:9px;">{{ f.balIqd }}</span>
+                        <span style="color:#1E8FD5;font-size:18px;">›</span>
+                      </div>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ oscr_flatDetail }}">
+              <div>
+                <div style="background:linear-gradient(140deg,#1E8FD5,#2BB3C0);padding:6px 18px 20px;color:#fff;">
+                  <button onClick="{{ goOwnerFlats }}" style="color:#fff;font-size:13px;font-weight:700;opacity:.92;margin-bottom:10px;">‹ شوقەکانم</button>
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:26px;font-weight:900;">{{ ownerFlat.code }}</span>
+                    <span style="background:rgba(255,255,255,.22);font-size:12px;font-weight:700;padding:5px 12px;border-radius:9px;">{{ ownerFlat.statusLabel }}</span>
+                  </div>
+                  <div style="font-size:12.5px;opacity:.92;margin-top:6px;">{{ ownerFlat.sub }}</div>
+                </div>
+                <div style="padding:16px;display:flex;flex-direction:column;gap:14px;">
+                  <div style="background:{{ ownerFlat.balBg }};border-radius:16px;padding:16px 18px;">
+                    <div style="font-size:12.5px;color:#6B7A90;font-weight:600;">باڵانسی ئێستا</div>
+                    <div style="font-size:24px;font-weight:900;color:{{ ownerFlat.balC }};margin-top:4px;">{{ ownerFlat.balIqd }}</div>
+                    <div style="font-size:12px;color:{{ ownerFlat.balC }};opacity:.8;">{{ ownerFlat.balUsd }}</div>
+                  </div>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:16px 18px;">
+                    <div style="font-size:14px;font-weight:800;color:#1B2A41;margin-bottom:12px;">فاتورەی ئەم مانگە</div>
+                    <div style="display:flex;flex-direction:column;gap:9px;">
+                      <sc-for list="{{ billBreak }}" as="bl" hint-placeholder-count="4">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                          <span style="width:8px;height:8px;border-radius:50%;background:{{ bl.c }};"></span>
+                          <span style="flex:1;font-size:13px;color:#1B2A41;font-weight:600;">{{ bl.label }}</span>
+                          <span style="font-size:13px;font-weight:800;color:#1B2A41;white-space:nowrap;">{{ bl.iqd }}</span>
+                        </div>
+                      </sc-for>
+                      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding-top:11px;border-top:1px solid #EEF2F7;">
+                        <span style="font-size:13.5px;font-weight:800;color:#1B2A41;">کۆی فاتورە</span>
+                        <span style="font-size:16px;font-weight:900;color:#1B2A41;white-space:nowrap;">{{ billTotalIqd }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:16px 18px;">
+                    <div style="font-size:14px;font-weight:800;color:#1B2A41;margin-bottom:10px;">مێژووی پارەدان</div>
+                    <sc-for list="{{ myPayments }}" as="p" hint-placeholder-count="3">
+                      <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F4F7FB;">
+                        <span style="background:{{ p.tagBg }};color:{{ p.tagC }};font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;">{{ p.type }}</span>
+                        <span style="flex:1;font-size:11.5px;color:#6B7A90;">{{ p.date }}</span>
+                        <span style="font-size:13px;font-weight:800;color:#1B2A41;">{{ p.iqd }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ oscr_payments }}">
+              <div style="padding:16px;">
+                <div style="font-size:18px;font-weight:800;color:#1B2A41;margin-bottom:14px;">پارەدانەکان</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ myPayments }}" as="p" hint-placeholder-count="5">
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+                      <span style="width:42px;height:42px;border-radius:12px;background:{{ p.tagBg }};color:{{ p.tagC }};display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-1.8L13 21l-1-1.4L11 21 9 19.2 6 21z"/><line x1="9" y1="9" x2="15" y2="9"/></svg></span>
+                      <div style="flex:1;line-height:1.3;">
+                        <div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ p.type }} — {{ p.code }}</div>
+                        <div style="font-size:11.5px;color:#6B7A90;">{{ p.date }}</div>
+                      </div>
+                      <div style="text-align:left;">
+                        <div style="font-size:14px;font-weight:800;color:#1B2A41;">{{ p.iqd }}</div>
+                        <button style="font-size:11px;font-weight:700;color:#1577B8;margin-top:2px;">بینینی پسوڵە ›</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ oscr_documents }}">
+              <div style="padding:16px;">
+                <div style="font-size:18px;font-weight:800;color:#1B2A41;margin-bottom:14px;">بەڵگەنامەکان</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{ myDocs }}" as="d" hint-placeholder-count="4">
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+                      <span style="width:42px;height:42px;border-radius:12px;background:{{ d.c }}1f;color:{{ d.c }};display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><polyline points="13 3 13 9 19 9"/></svg></span>
+                      <div style="flex:1;line-height:1.3;"><div style="font-size:13px;font-weight:700;color:#1B2A41;">{{ d.name }}</div><div style="font-size:11px;color:#6B7A90;">{{ d.cat }}</div></div>
+                      <span style="width:34px;height:34px;border-radius:10px;background:#F4F7FB;color:#1577B8;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ oscr_profile }}">
+              <div>
+                <div style="background:linear-gradient(140deg,#1E8FD5,#2BB3C0);padding:24px 18px 30px;color:#fff;display:flex;flex-direction:column;align-items:center;">
+                  <div style="width:74px;height:74px;border-radius:22px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;backdrop-filter:blur(4px);">ئـ</div>
+                  <div style="font-size:19px;font-weight:800;margin-top:12px;">ئاکۆ مەحمود حسێن</div>
+                  <div style="font-size:12.5px;opacity:.9;margin-top:2px;">خاوەنی موڵک</div>
+                </div>
+                <div style="padding:16px;display:flex;flex-direction:column;gap:12px;">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;overflow:hidden;">
+                    <div style="display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid #F4F7FB;">
+                      <span style="width:36px;height:36px;border-radius:10px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span>
+                      <div style="flex:1;"><div style="font-size:11.5px;color:#6B7A90;">مۆبایل</div><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">07701234567</div></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:15px 16px;">
+                      <span style="width:36px;height:36px;border-radius:10px;background:#E8F6EF;color:#2E9E6B;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21H3z"/><path d="M9 21v-7h6v7"/></svg></span>
+                      <div style="flex:1;"><div style="font-size:11.5px;color:#6B7A90;">ژمارەی شوقەکان</div><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">2 شوقە</div></div>
+                    </div>
+                  </div>
+                  <button onClick="{{ ownerLogout }}" style="width:100%;height:50px;border-radius:14px;background:#FCEDEF;color:#D1495B;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>چوونەدەرەوە</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ oscr_money }}">
+              <div>
+                <div style="background:linear-gradient(140deg,#1E8FD5,#2BB3C0);padding:6px 18px 48px;color:#fff;">
+                  <div style="font-size:13px;opacity:.92;">حساب و پارە</div>
+                  <div style="font-size:20px;font-weight:800;margin-top:2px;">پوختەی دارایی</div>
+                </div>
+                <div style="padding:0 14px 18px;margin-top:-32px;display:flex;flex-direction:column;gap:13px;">
+                  <div style="display:flex;gap:7px;overflow-x:auto;padding:2px;">
+                    <sc-for list="{{ ownerPeriods }}" as="p" hint-placeholder-count="6">
+                      <button onClick="{{ p.go }}" style="flex-shrink:0;padding:8px 13px;border-radius:11px;font-size:12px;font-weight:700;white-space:nowrap;background:{{ p.bg }};color:{{ p.c }};border:1px solid {{ p.bd }};">{{ p.label }}</button>
+                    </sc-for>
+                  </div>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:18px;padding:18px;box-shadow:0 12px 30px -16px rgba(27,42,65,.25);">
+                    <div style="display:flex;gap:12px;">
+                      <div style="flex:1;"><div style="font-size:12px;color:#6B7A90;font-weight:600;">کۆی پارەدان لەم ماوەیە</div><div style="font-size:21px;font-weight:900;color:#2E9E6B;margin-top:5px;line-height:1;">{{ ownerMoney.paidIqd }}</div><div style="font-size:11.5px;color:#2BB3C0;font-weight:700;">≈ {{ ownerMoney.paidUsd }}</div></div>
+                      <div style="width:1px;background:#EEF2F7;"></div>
+                      <div style="flex:1;"><div style="font-size:12px;color:#6B7A90;font-weight:600;">قەرزی ئێستا</div><div style="font-size:21px;font-weight:900;color:#D1495B;margin-top:5px;line-height:1;">{{ ownerMoney.owedIqd }}</div><div style="font-size:11.5px;color:#6B7A90;font-weight:700;">≈ {{ ownerMoney.owedUsd }}</div></div>
+                    </div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:13px;"><div style="font-size:11.5px;color:#6B7A90;">کرێ</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">{{ ownerMoney.rent }}</div></div>
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:13px;"><div style="font-size:11.5px;color:#6B7A90;">فاتورە</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">{{ ownerMoney.bill }}</div></div>
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:13px;"><div style="font-size:11.5px;color:#6B7A90;">قیست/مۆرگەج</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">{{ ownerMoney.mort }}</div></div>
+                    <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:13px;"><div style="font-size:11.5px;color:#6B7A90;">کاڵا</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">{{ ownerMoney.item }}</div></div>
+                  </div>
+                  <sc-if value="{{ ownerMoney.isCustom }}">
+                    <div style="display:flex;gap:8px;">
+                      <div style="flex:1;background:#fff;border:1px solid #E3E9F2;border-radius:12px;padding:11px 13px;font-size:12px;color:#6B7A90;">لە: 2026-01-01</div>
+                      <div style="flex:1;background:#fff;border:1px solid #E3E9F2;border-radius:12px;padding:11px 13px;font-size:12px;color:#6B7A90;">بۆ: 2026-06-16</div>
+                    </div>
+                  </sc-if>
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:14px 16px;">
+                    <div style="font-size:14px;font-weight:700;color:#1B2A41;margin-bottom:8px;">پارەدانەکانی ئەم ماوەیە</div>
+                    <sc-for list="{{ ownerMoney.txns }}" as="x" hint-placeholder-count="2">
+                      <div style="display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid #F4F7FB;">
+                        <span style="width:9px;height:9px;border-radius:50%;background:{{ x.c }};"></span>
+                        <div style="flex:1;line-height:1.25;"><div style="font-size:13px;font-weight:600;color:#1B2A41;">{{ x.t }}</div><div style="font-size:11px;color:#6B7A90;">{{ x.d }}</div></div>
+                        <span style="font-size:13px;font-weight:800;color:#2E9E6B;">{{ x.v }}</span>
+                      </div>
+                    </sc-for>
+                    <sc-if value="{{ ownerMoney.empty }}">
+                      <div style="text-align:center;color:#9AA8BC;font-size:12.5px;padding:14px 0;">هیچ پارەدانێک لەم ماوەیەدا نییە</div>
+                    </sc-if>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+          </div>
+
+          <div style="height:66px;flex-shrink:0;background:#fff;border-top:1px solid #EEF2F7;display:flex;align-items:center;padding:0 6px 6px;">
+            <sc-for list="{{ ownerNav }}" as="n" hint-placeholder-count="5">
+              <button onClick="{{ n.go }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:8px;color:{{ n.color }};">
+                <span>{{ n.icon }}</span>
+                <span style="font-size:10px;font-weight:700;">{{ n.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showOwnerLogin }}">
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;background:#E7ECF3;padding:20px;">
+      <div style="width:392px;height:812px;background:#0E1726;border-radius:46px;box-shadow:0 36px 80px -24px rgba(27,42,65,.5);padding:11px;flex-shrink:0;">
+        <div style="width:100%;height:100%;border-radius:36px;overflow:hidden;background:linear-gradient(160deg,#1E8FD5,#2BB3C0);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;color:#fff;">
+          <div style="background:#fff;width:80px;height:80px;border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 16px 30px -12px rgba(0,0,0,.3);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M4 24 C12 13, 36 13, 44 24 C36 35, 12 35, 4 24 Z" fill="#EAF4FC" stroke="#1E8FD5" stroke-width="2.6"/><circle cx="24" cy="24" r="7.6" fill="#1E8FD5"/><circle cx="21" cy="21" r="2.4" fill="#fff"/></svg>
+          </div>
+          <div style="font-size:22px;font-weight:800;">{{ cityName }}</div>
+          <div style="font-size:12px;opacity:.9;margin-bottom:30px;">پۆرتاڵی خاوەنەکان</div>
+          <div style="width:100%;background:rgba(255,255,255,.16);border-radius:18px;padding:20px;backdrop-filter:blur(6px);">
+            <input value="ako.m" placeholder="ناوی بەکارهێنەر" style="width:100%;height:46px;border:none;border-radius:12px;padding:0 14px;font-size:14px;margin-bottom:12px;outline:none;background:#fff;color:#1B2A41;"/>
+            <input type="password" value="123456" style="width:100%;height:46px;border:none;border-radius:12px;padding:0 14px;font-size:14px;margin-bottom:18px;outline:none;background:#fff;color:#1B2A41;"/>
+            <button onClick="{{ ownerLogin }}" style="width:100%;height:48px;border-radius:12px;background:#1B2A41;color:#fff;font-size:15px;font-weight:800;">چوونەژوورەوە</button>
+          </div>
+          <button onClick="{{ toStaff }}" style="margin-top:20px;color:#fff;font-size:12.5px;font-weight:700;opacity:.9;">چوونە ناو ستاف (دێسکتۆپ) ›</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modalPayment }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:460px;max-width:100%;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-size:18px;font-weight:800;color:#1B2A41;">تۆمارکردنی پارەدان</div>
+          <button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;color:#6B7A90;font-size:18px;">✕</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">شوقە / خاوەن</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;padding:0 14px;font-size:14px;font-weight:600;">B1-12-4 · ئاکۆ مەحمود</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆر</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px;font-weight:600;">فاتورە <span style="color:#6B7A90;">▾</span></div></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆری پارە</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px;font-weight:600;">دینار (د.ع) <span style="color:#6B7A90;">▾</span></div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">بڕی پارە</label><input value="440,000" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:15px;font-weight:700;outline:none;"/></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">بەروار</label><input value="2026-06-16" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+          </div>
+          <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">تێبینی</label><input placeholder="تێبینی…" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:22px;">
+          <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
+          <button onClick="{{ confirmPayment }}" style="flex:1.4;height:46px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);">پاشەکەوت و پسوڵە</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modalReceipt }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:380px;max-width:100%;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="background:linear-gradient(135deg,#1E8FD5,#2BB3C0);padding:22px;color:#fff;display:flex;align-items:center;gap:12px;">
+          <div style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;"><svg width="26" height="26" viewBox="0 0 48 48" fill="none"><path d="M4 24 C12 13, 36 13, 44 24 C36 35, 12 35, 4 24 Z" fill="#fff" opacity=".25"/><circle cx="24" cy="24" r="7.6" fill="#fff"/><circle cx="21" cy="21" r="2.4" fill="#1E8FD5"/></svg></div>
+          <div style="flex:1;"><div style="font-size:16px;font-weight:800;">پسوڵەی پارەدان</div><div style="font-size:12px;opacity:.9;">{{ cityName }} · #RC-2026-0418</div></div>
+          <div style="background:rgba(255,255,255,.2);font-size:11px;font-weight:800;padding:5px 10px;border-radius:8px;">دراوە ✓</div>
+        </div>
+        <div style="padding:22px;">
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#6B7A90;">شوقە</span><span style="font-weight:700;color:#1B2A41;">B1-12-4</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#6B7A90;">خاوەن</span><span style="font-weight:700;color:#1B2A41;">ئاکۆ مەحمود</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#6B7A90;">جۆر</span><span style="font-weight:700;color:#1B2A41;">فاتورەی مانگانە</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:#6B7A90;">بەروار</span><span style="font-weight:700;color:#1B2A41;">2026-06-16</span></div>
+          </div>
+          <div style="border-top:1px dashed #D4DCE8;margin:16px 0;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;color:#6B7A90;font-weight:600;">کۆی گشتی</span><div style="text-align:left;"><div style="font-size:24px;font-weight:900;color:#1B2A41;">440,000 د.ع</div><div style="font-size:12px;color:#2BB3C0;font-weight:700;">≈ $300</div></div></div>
+          <div style="display:flex;gap:10px;margin-top:22px;">
+            <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">داخستن</button>
+            <button style="flex:1;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modalBill }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:480px;max-width:100%;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-size:18px;font-weight:800;color:#1B2A41;">دروستکردنی فاتورەی مانگانە</div>
+          <button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;color:#6B7A90;font-size:18px;">✕</button>
+        </div>
+        <div style="font-size:13px;color:#6B7A90;font-weight:600;margin-bottom:8px;">شوقە: <b style="color:#1B2A41;">B1-12-4</b> · مانگی حوزەیران 2026</div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;align-items:center;gap:10px;background:#FBF3DA;border-radius:11px;padding:12px 14px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#E0A100;"></span>
+            <span style="flex:1;font-size:13px;font-weight:700;color:#1B2A41;">کارەبا (مەتر)</span>
+            <input value="1,240" style="width:80px;height:38px;border:1px solid #E3E9F2;border-radius:9px;background:#fff;text-align:center;font-size:13px;outline:none;"/>
+            <span style="color:#A57C00;">→</span>
+            <input value="1,560" style="width:80px;height:38px;border:1px solid #E3E9F2;border-radius:9px;background:#fff;text-align:center;font-size:13px;outline:none;"/>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;background:#EAF4FC;border-radius:11px;padding:12px 14px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#1E8FD5;"></span>
+            <span style="flex:1;font-size:13px;font-weight:700;color:#1B2A41;">ئاو (مەتر م³)</span>
+            <input value="18" style="width:80px;height:38px;border:1px solid #E3E9F2;border-radius:9px;background:#fff;text-align:center;font-size:13px;outline:none;"/>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+            <div style="background:#F4F7FB;border-radius:11px;padding:12px 14px;"><div style="font-size:12px;color:#6B7A90;font-weight:600;">گاز (جێگیر)</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">25,000 د.ع</div></div>
+            <div style="background:#F4F7FB;border-radius:11px;padding:12px 14px;"><div style="font-size:12px;color:#6B7A90;font-weight:600;">خزمەتگوزاری (جێگیر)</div><div style="font-size:15px;font-weight:800;color:#1B2A41;margin-top:3px;">50,000 د.ع</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:14px;background:#1B2A41;border-radius:12px;color:#fff;">
+          <span style="font-size:14px;font-weight:700;">کۆی فاتورە</span>
+          <div style="text-align:left;"><div style="font-size:18px;font-weight:900;">440,000 د.ع</div><div style="font-size:11.5px;opacity:.85;">≈ $300</div></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
+          <button onClick="{{ closeModal }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">دروستکردنی فاتورە</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modalExpense }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:460px;max-width:100%;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-size:18px;font-weight:800;color:#1B2A41;">تۆمارکردنی خەرجی</div>
+          <button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;color:#6B7A90;font-size:18px;">✕</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">خەرجی سەرەکی/لاوەکی</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px;font-weight:600;">سەرەکی <span style="color:#6B7A90;">▾</span></div></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆری پارە</label><div style="margin-top:6px;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:14px;font-weight:600;">دینار (د.ع) <span style="color:#6B7A90;">▾</span></div></div>
+          </div>
+          <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">ناونیشانی خەرجی</label><input value="چاکسازی ئاسانسۆر — B2" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">بڕی پارە</label><input value="1,800,000" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:15px;font-weight:700;outline:none;"/></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">وەرگر</label><input value="کۆمپانیای تەکنیک" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:22px;">
+          <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
+          <button onClick="{{ closeModal }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">پاشەکەوت</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ modalUpload }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:440px;max-width:100%;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+          <div style="font-size:18px;font-weight:800;color:#1B2A41;">بارکردنی بەڵگەنامە</div>
+          <button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;color:#6B7A90;font-size:18px;">✕</button>
+        </div>
+        <div style="border:2px dashed #C2D2E4;border-radius:14px;padding:34px;display:flex;flex-direction:column;align-items:center;gap:10px;background:#FAFBFD;">
+          <span style="width:54px;height:54px;border-radius:15px;background:#EAF4FC;color:#1577B8;display:flex;align-items:center;justify-content:center;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 9 12 4 17 9"/><line x1="12" y1="4" x2="12" y2="16"/></svg></span>
+          <div style="font-size:14px;font-weight:700;color:#1B2A41;">فایلێک ڕابکێشە بۆ ئێرە</div>
+          <div style="font-size:12px;color:#6B7A90;">PDF, JPG, PNG — تا 10MB</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
+          <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">جۆر</label><div style="margin-top:6px;height:44px;border:1px solid #E3E9F2;border-radius:11px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 13px;font-size:13.5px;font-weight:600;">گرێبەست <span style="color:#6B7A90;">▾</span></div></div>
+          <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">پەیوەست بە</label><div style="margin-top:6px;height:44px;border:1px solid #E3E9F2;border-radius:11px;background:#FAFBFD;display:flex;align-items:center;justify-content:space-between;padding:0 13px;font-size:13.5px;font-weight:600;">B1-12-4 <span style="color:#6B7A90;">▾</span></div></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
+          <button onClick="{{ closeModal }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">بارکردن</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;startExperience&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;staff&quot;,&quot;owner&quot;],&quot;default&quot;:&quot;staff&quot;},&quot;exchangeRate&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1470,&quot;min&quot;:1000,&quot;max&quot;:2000,&quot;step&quot;:10},&quot;cityName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Chawy Slemani&quot;}}">
+class Component extends DCLogic {
+  state = {
+    mode: 'staff', staffAuthed: true, ownerAuthed: true,
+    staffScreen: 'dashboard', ownerScreen: 'home', ownerPeriod: 'month',
+    building: 'B1', floor: 12, flatCode: 'B1-12-4', ownerId: 'O1',
+    flatTab: 'bills', ownerFlatCode: 'B1-12-4', overdueB: 'all',
+    modal: null,
+  };
+  get RATE(){ return this.props.exchangeRate || 1470; }
+  componentDidMount(){ if(this.props.startExperience === 'owner') this.setState({mode:'owner'}); }
+
+  owners = [
+    {id:'O1', name:'ئاکۆ مەحمود حسێن', short:'ئاکۆ مەحمود', mobile:'07701234567'},
+    {id:'O2', name:'شیلان عەبدوڵڵا کەریم', short:'شیلان عەبدوڵڵا', mobile:'07709988776'},
+    {id:'O3', name:'هێمن ڕەسوڵ ئەحمەد', short:'هێمن ڕەسوڵ', mobile:'07501122334'},
+    {id:'O4', name:'دیلان عومەر ساڵح', short:'دیلان عومەر', mobile:'07705566778'},
+    {id:'O5', name:'کاروان جەلال محەمەد', short:'کاروان جەلال', mobile:'07712233445'},
+    {id:'O6', name:'ئاسۆ نەژاد رەشید', short:'ئاسۆ نەژاد', mobile:'07508899001'},
+    {id:'CO', name:'کۆمپانیا', short:'کۆمپانیا', mobile:'—'},
+  ];
+  flats = [
+    {code:'B1-12-1', b:'B1', fl:12, n:1, area:130, owner:'O5', status:'owner'},
+    {code:'B1-12-2', b:'B1', fl:12, n:2, area:128, owner:'O6', status:'rented', tenant:'هاوڕێ تۆفیق', rent:600, bal:0, last:'2026-06-03'},
+    {code:'B1-12-3', b:'B1', fl:12, n:3, area:140, owner:'O3', status:'vacant'},
+    {code:'B1-12-4', b:'B1', fl:12, n:4, area:145, owner:'O1', status:'rented', tenant:'ڕێبین ساڵح', rent:650, bal:440000, last:'2026-05-28', odm:1},
+    {code:'B1-12-5', b:'B1', fl:12, n:5, area:150, owner:'CO', status:'company', tenant:'—', rent:680, bal:0, last:'2026-06-01'},
+    {code:'B1-12-6', b:'B1', fl:12, n:6, area:132, owner:'O2', status:'owner'},
+    {code:'B1-3-2', b:'B1', fl:3, n:2, area:120, owner:'O2', status:'owner'},
+    {code:'B2-3-1', b:'B2', fl:3, n:1, area:118, owner:'O1', status:'owner'},
+    {code:'B2-7-2', b:'B2', fl:7, n:2, area:160, owner:'CO', status:'company', tenant:'بەفرین کەمال', rent:700, bal:1800000, last:'2026-03-10', odm:3},
+    {code:'B2-18-5', b:'B2', fl:18, n:5, area:110, owner:'O3', status:'vacant'},
+    {code:'A1-9-1', b:'A1', fl:9, n:1, area:175, owner:'CO', status:'company', tenant:'—', rent:800, bal:0, last:'2026-06-02'},
+    {code:'A1-21-6', b:'A1', fl:21, n:6, area:95, owner:'O4', status:'rented', tenant:'ئاراس فەرید', rent:520, bal:600000, last:'2026-05-12', odm:1},
+  ];
+  overdue = [
+    {code:'A1-4-5', owner:'O4', m:4, last:'2026-02-15', bal:2400000},
+    {code:'B2-7-2', owner:'CO', m:3, last:'2026-03-10', bal:1800000},
+    {code:'B2-15-3', owner:'O5', m:2, last:'2026-04-08', bal:1200000},
+    {code:'B2-11-1', owner:'CO', m:2, last:'2026-04-22', bal:1000000},
+    {code:'A1-21-6', owner:'O4', m:1, last:'2026-05-12', bal:600000},
+    {code:'B1-12-4', owner:'O1', m:1, last:'2026-05-28', bal:440000},
+    {code:'B1-20-2', owner:'O6', m:1, last:'2026-05-20', bal:380000},
+  ];
+
+  iqd(n){ return Number(n).toLocaleString('en-US') + ' د.ع'; }
+  usd(n){ return '$' + Math.round(Number(n)/this.RATE).toLocaleString('en-US'); }
+  oName(id){ const o = this.owners.find(x=>x.id===id); return o ? o.short : id; }
+  oFull(id){ const o = this.owners.find(x=>x.id===id); return o ? o.name : id; }
+  sm(s){ return ({
+    owner:{label:'نیشتەجێ بە خاوەن', c:'#1E8FD5', bg:'#EAF4FC'},
+    rented:{label:'بەکرێدراو', c:'#2E9E6B', bg:'#E8F6EF'},
+    company:{label:'موڵکی کۆمپانیا', c:'#2BB3C0', bg:'#E6F7F9'},
+    vacant:{label:'بەتاڵ', c:'#6B7A90', bg:'#EEF2F7'},
+  })[s]; }
+
+  navTo(s){ this.setState({staffScreen:s}); }
+  doPrint(){ try{ window.print(); }catch(e){} }
+  csv(name, rows){ try{ const c=rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n'); const b=new Blob(['﻿'+c],{type:'text/csv;charset=utf-8;'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download=name+'.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u); }catch(e){} }
+  icon(name, on){
+    const c = on ? '#1E8FD5' : '#7A899C';
+    const R = (t,p)=>React.createElement(t,p);
+    const S = (ch)=>R('svg',{width:19,height:19,viewBox:'0 0 24 24',fill:'none',stroke:c,strokeWidth:1.9,strokeLinecap:'round',strokeLinejoin:'round'}, ch);
+    const m = {
+      dashboard:[R('rect',{key:1,x:3,y:3,width:7,height:7,rx:1.6}),R('rect',{key:2,x:14,y:3,width:7,height:7,rx:1.6}),R('rect',{key:3,x:3,y:14,width:7,height:7,rx:1.6}),R('rect',{key:4,x:14,y:14,width:7,height:7,rx:1.6})],
+      buildings:[R('rect',{key:1,x:4,y:3,width:16,height:18,rx:1.6}),R('line',{key:2,x1:9,y1:7,x2:9,y2:7.01}),R('line',{key:3,x1:15,y1:7,x2:15,y2:7.01}),R('line',{key:4,x1:9,y1:12,x2:9,y2:12.01}),R('line',{key:5,x1:15,y1:12,x2:15,y2:12.01}),R('path',{key:6,d:'M10 21v-3h4v3'})],
+      owners:[R('circle',{key:1,cx:9,cy:8,r:3.2}),R('path',{key:2,d:'M3.5 20a5.5 5.5 0 0 1 11 0'}),R('path',{key:3,d:'M16 6.5a3 3 0 0 1 0 5.8'}),R('path',{key:4,d:'M18 14.5a5 5 0 0 1 2.5 4.5'})],
+      rent:[R('rect',{key:1,x:2.5,y:6,width:19,height:12,rx:2}),R('circle',{key:2,cx:12,cy:12,r:2.6}),R('line',{key:3,x1:6,y1:9,x2:6,y2:9.01}),R('line',{key:4,x1:18,y1:15,x2:18,y2:15.01})],
+      bills:[R('path',{key:1,d:'M6 3h9l3 3v15l-2.2-1.3L13.6 21 12 19.7 10.4 21 8.2 19.7 6 21z'}),R('line',{key:2,x1:9,y1:9,x2:15,y2:9}),R('line',{key:3,x1:9,y1:13,x2:13,y2:13})],
+      payments:[R('rect',{key:1,x:3,y:5,width:18,height:14,rx:2}),R('line',{key:2,x1:3,y1:9.5,x2:21,y2:9.5}),R('line',{key:3,x1:7,y1:14.5,x2:11,y2:14.5})],
+      overdue:[R('path',{key:1,d:'M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9'}),R('path',{key:2,d:'M10.3 21a1.9 1.9 0 0 0 3.4 0'})],
+      documents:[R('path',{key:1,d:'M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z'}),R('polyline',{key:2,points:'13 3 13 9 19 9'}),R('line',{key:3,x1:9,y1:13,x2:15,y2:13}),R('line',{key:4,x1:9,y1:16.5,x2:13,y2:16.5})],
+      expenses:[R('path',{key:1,d:'M12 2v20'}),R('path',{key:2,d:'M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'})],
+      cashbox:[R('rect',{key:1,x:3,y:6,width:18,height:13,rx:2}),R('path',{key:2,d:'M3 10h18'}),R('path',{key:3,d:'M7 6V4h10v2'}),R('circle',{key:4,cx:12,cy:14,r:1.6})],
+      reports:[R('line',{key:1,x1:4,y1:20,x2:20,y2:20}),R('rect',{key:2,x:6,y:11,width:3,height:6,rx:1}),R('rect',{key:3,x:11,y:7,width:3,height:10,rx:1}),R('rect',{key:4,x:16,y:13,width:3,height:4,rx:1})],
+      settings:[R('circle',{key:1,cx:12,cy:12,r:3}),R('path',{key:2,d:'M19 12a7 7 0 0 0-.1-1.3l1.9-1.4-2-3.4-2.2.9A7 7 0 0 0 14 5l-.3-2.3h-3.4L10 5a7 7 0 0 0-2.5 1.4l-2.2-.9-2 3.4 1.9 1.4A7 7 0 0 0 5 12c0 .4 0 .9.1 1.3l-1.9 1.4 2 3.4 2.2-.9A7 7 0 0 0 10 19l.3 2.3h3.4L14 19a7 7 0 0 0 2.5-1.4l2.2.9 2-3.4-1.9-1.4c.1-.4.1-.9.1-1.7z'})],
+      mortgage:[R('path',{key:1,d:'M3 11l9-7 9 7'}),R('path',{key:2,d:'M5 10v10h14V10'}),R('rect',{key:3,x:10,y:14,width:4,height:6})],
+      items:[R('path',{key:1,d:'M3 7l9-4 9 4v10l-9 4-9-4z'}),R('path',{key:2,d:'M3 7l9 4 9-4'}),R('line',{key:3,x1:12,y1:11,x2:12,y2:21})],
+      income:[R('circle',{key:1,cx:12,cy:12,r:9}),R('path',{key:2,d:'M12 8v8'}),R('path',{key:3,d:'M8.5 12.5l3.5 3.5 3.5-3.5'})],
+      statement:[R('path',{key:1,d:'M7 3h7l4 4v14H7z'}),R('line',{key:2,x1:10,y1:8,x2:12,y2:8}),R('line',{key:3,x1:10,y1:12,x2:15,y2:12}),R('line',{key:4,x1:10,y1:16,x2:15,y2:16})],
+      employees:[R('circle',{key:1,cx:9,cy:8,r:3}),R('path',{key:2,d:'M3.5 20a5.5 5.5 0 0 1 11 0'}),R('circle',{key:3,cx:17.5,cy:9,r:2}),R('path',{key:4,d:'M16.5 20a4.5 4.5 0 0 1 4.8-4.3'})],
+    };
+    return S(m[name]||m.dashboard);
+  }
+
+  renderVals(){
+    const st = this.state;
+    const staff = st.mode==='staff';
+    const tab = (active)=>({padding:'8px 16px',borderRadius:'9px',fontSize:'13px',fontWeight:700,transition:'all .2s',
+      background: active ? '#1E8FD5' : 'transparent', color: active ? '#fff' : '#6B7A90', boxShadow: active ? '0 2px 6px -2px rgba(30,143,213,.6)' : 'none'});
+    const navItem = (id,label,icon,badge)=>{ const on = st.staffScreen===id; return {
+      label, icon: this.icon(icon,on), badge,
+      go: ()=>this.navTo(id),
+      style:{display:'flex',alignItems:'center',gap:'11px',width:'100%',padding:'10px 12px',borderRadius:'11px',transition:'all .15s',
+        background: on ? '#EAF4FC' : 'transparent', color: on ? '#1577B8' : '#1B2A41'},
+    };};
+    const titles = {dashboard:['داشبۆرد','پوختەی گشتی سیستەم'],buildings:['عیمارە و شوقەکان','بەڕێوەبردنی موڵک'],
+      owners:['خاوەنەکان','تۆماری خاوەنان'],rent:['کرێ','بەڕێوەبردنی کرێ'],bills:['خزمەتگوزاری و فاتورە','فاتورەی مانگانە'],
+      payments:['پارەوەرگرتن و پسوڵە','تۆمارکردنی پارە'],overdue:['بیرخەرەوە — دواکەوتوو','شوقەی قەرزدار'],
+      documents:['بەڵگەنامە','ئەرشیفی بەڵگەنامەکان'],expenses:['خەرجی','تۆماری خەرجییەکان'],cashbox:['صندوق','باڵانسی پارە'],
+      reports:['ڕاپۆرت','ڕاپۆرتەکان'],settings:['ڕێکخستن','ڕێکخستنی سیستەم'],
+      mortgage:['قیست — مۆرگەج','پارەدانی قیستی شوقە'],items:['کاڵا','فرۆشتنی کاڵا بۆ شوقە'],income:['داهاتی جۆراوجۆر','داهاتی تر'],statement:['کەشف حساب','کەشف حسابی شوقە'],
+      employees:['کارمەندان','مووچە و ستاف'],
+      flat:['پرۆفایلی شوقە','زانیاری شوقە'],ownerProfile:['پرۆفایلی خاوەن','زانیاری خاوەن']};
+    const ti = titles[st.staffScreen]||['',''];
+
+    const donutData=[{label:'نیشتەجێ بە خاوەن',v:64,c:'#1E8FD5'},{label:'بەکرێدراو',v:132,c:'#2E9E6B'},{label:'موڵکی کۆمپانیا',v:52,c:'#2BB3C0'},{label:'بەتاڵ',v:28,c:'#9AA8BC'}];
+    const C=2*Math.PI*54; let acc=0;
+    const donut=donutData.map(d=>{ const frac=d.v/276; const seg={label:d.label,v:d.v,c:d.c,dash:`${(frac*C).toFixed(1)} ${(C-frac*C).toFixed(1)}`,offset:`${(-acc*C).toFixed(1)}`}; acc+=frac; return seg; });
+
+    const trendRaw=[{m:'کانوون',v:98},{m:'شوبات',v:110},{m:'ئادار',v:121},{m:'نیسان',v:132},{m:'ئایار',v:128},{m:'حوزەیران',v:142.5}];
+    const trend=trendRaw.map((t,i)=>({m:t.m,v:t.v,h:`${(t.v/150*100).toFixed(0)}%`,fill: i===trendRaw.length-1 ? '#1E8FD5' : '#BFE0F4'}));
+
+    const payTag=(type)=> type==='کرێ' ? {tagBg:'#E8F6EF',tagC:'#2E9E6B'} : type==='فاتورە' ? {tagBg:'#EAF4FC',tagC:'#1577B8'} : {tagBg:'#FBF3DA',tagC:'#A57C00'};
+    const recentRaw=[
+      {date:'2026-06-12',code:'A1-9-1',owner:'کۆمپانیا',type:'کرێ',v:1176000},
+      {date:'2026-06-10',code:'B1-12-2',owner:'ئاسۆ نەژاد',type:'کرێ',v:882000},
+      {date:'2026-06-09',code:'B1-12-5',owner:'کۆمپانیا',type:'فاتورە',v:410000},
+      {date:'2026-06-08',code:'B2-3-1',owner:'ئاکۆ مەحمود',type:'فاتورە',v:365000},
+      {date:'2026-06-06',code:'B1-3-2',owner:'شیلان عەبدوڵڵا',type:'قیست',v:298000},
+    ];
+    const recentPayments=recentRaw.map(p=>({...p, iqd:this.iqd(p.v), usd:this.usd(p.v), ...payTag(p.type)}));
+
+    const sevOf=(m)=> m>=2 ? {sev:'#D1495B',sevBg:'#FCEDEF'} : {sev:'#E0A100',sevBg:'#FBF3DA'};
+    const avPal=[['#EAF4FC','#1577B8'],['#E8F6EF','#2E9E6B'],['#E6F7F9','#1f8a96'],['#FBF3DA','#A57C00'],['#F0EAFB','#7A5BC0']];
+    const mkOver=(o,i)=>{ const s=sevOf(o.m); const av=avPal[i%avPal.length]; const nm=this.oName(o.owner);
+      return {code:o.code, owner:nm, initial:nm[0], avBg:av[0], avC:av[1], since:`${o.m} مانگ`, last:o.last,
+        iqd:this.iqd(o.bal), usd:this.usd(o.bal), sev:s.sev, sevBg:s.sevBg,
+        go:()=>this.setState({staffScreen:'flat',flatCode:o.code}), mark:()=>{}}; };
+    let overList = this.overdue;
+    if(st.overdueB!=='all') overList = overList.filter(o=>o.code.startsWith(st.overdueB));
+    const overdueRows = overList.map(mkOver);
+    const dashOverdue = this.overdue.slice(0,4).map((o,i)=>{ const s=sevOf(o.m);
+      return {code:o.code, owner:this.oName(o.owner), since:`${o.m} مانگ`, iqd:this.iqd(o.bal), usd:this.usd(o.bal), sev:s.sev,
+        go:()=>this.setState({staffScreen:'flat',flatCode:o.code})}; });
+
+    const bChips=['all','B1','B2','A1'].map(b=>({label: b==='all'?'هەموو':b, go:()=>this.setState({overdueB:b}),
+      style:{fontSize:'12.5px',fontWeight:700,borderRadius:'9px',padding:'7px 13px',transition:'all .15s',
+        background: st.overdueB===b ? '#1B2A41' : '#F4F7FB', color: st.overdueB===b ? '#fff' : '#6B7A90', border:'1px solid '+(st.overdueB===b?'#1B2A41':'#E3E9F2')}}));
+
+    // buildings & flats
+    const buildings=['B1','B2','A1'].map(b=>({id:b, active:st.building===b,
+      style:{flex:1,height:'44px',borderRadius:'11px',fontSize:'14px',fontWeight:800,transition:'all .15s',
+        background: st.building===b ? '#1E8FD5':'#F4F7FB', color: st.building===b?'#fff':'#1B2A41', border:'1px solid '+(st.building===b?'#1E8FD5':'#E3E9F2')},
+      go:()=>this.setState({building:b})}));
+    const floors=Array.from({length:24},(_,i)=>{ const n=24-i; const has=true; const pent=n>=23;
+      return {n, label:'نهۆم '+n+(pent?' · پەنتهاوس':''), active:st.floor===n, has,
+        style:{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',borderRadius:'10px',cursor:'pointer',transition:'all .15s',
+          background: st.floor===n ? '#EAF4FC':'transparent', color: st.floor===n?'#1577B8':'#1B2A41', fontWeight: st.floor===n?800:600, fontSize:'13.5px'},
+        go:()=>this.setState({floor:n})}; });
+    const PHN=(st.floor>=23)?2:4; const sampleBy={}; this.flats.forEach(x=>sampleBy[x.code]=x);
+    const cyc=['owner','rented','company','vacant','rented','owner'];
+    const gridFlats=Array.from({length:PHN},(_,i)=>{ const nn=i+1; const code=st.building+'-'+st.floor+'-'+nn; const s=sampleBy[code]; const isP=st.floor>=23;
+      const status=s?s.status:cyc[(st.floor*3+nn)%cyc.length]; const m=this.sm(status);
+      const area=(s?s.area:(isP?215:108+((st.floor*7+nn*11)%56)));
+      const owner=this.oName(s?s.owner:['O1','O2','O3','O4','O5','O6','CO'][(st.floor+nn*2)%7]); const od=s?s.bal>0:false;
+      return {code, area:(isP?'پەنتهاوس · ':'')+area+' م²', owner, label:m.label, c:m.c, bg:m.bg,
+        ring: od?'2px solid #D1495B':'1px solid '+m.c+'33', od,
+        go:()=>this.setState({staffScreen:'flat',flatCode:code})}; });
+    const legend=[['نیشتەجێ بە خاوەن','#1E8FD5'],['بەکرێدراو','#2E9E6B'],['موڵکی کۆمپانیا','#2BB3C0'],['بەتاڵ','#9AA8BC'],['دواکەوتوو (بازنەی سوور)','#D1495B']].map(([l,c])=>({l,c}));
+
+    // flat profile
+    const f=this.flats.find(x=>x.code===st.flatCode)||this.flats[3];
+    const fm=this.sm(f.status); const fOwner=this.owners.find(o=>o.id===f.owner)||this.owners[0];
+    const isRented=f.status==='rented'||(f.status==='company'&&f.tenant&&f.tenant!=='—');
+    const billBreak=[
+      {label:'کارەبا',meta:'مەتر 1,240 → 1,560 · 320 یەکە',v:320000,c:'#E0A100'},
+      {label:'ئاو',meta:'مەتر · 18 م³',v:45000,c:'#1E8FD5'},
+      {label:'گاز',meta:'بڕی جێگیر',v:25000,c:'#2BB3C0'},
+      {label:'خزمەتگوزاری',meta:'بڕی جێگیر',v:50000,c:'#7A5BC0'},
+    ].map(b=>({...b, iqd:this.iqd(b.v)}));
+    const flatPays=[
+      {date:'2026-04-30',type:'کرێ',v:955500},{date:'2026-03-30',type:'کرێ',v:955500},
+      {date:'2026-03-05',type:'فاتورە',v:402000},{date:'2026-02-28',type:'کرێ',v:955500},
+    ].map(p=>({...p,iqd:this.iqd(p.v),usd:this.usd(p.v), tagBg:p.type==='کرێ'?'#E8F6EF':'#EAF4FC', tagC:p.type==='کرێ'?'#2E9E6B':'#1577B8'}));
+    const flatDocs=[
+      {name:'گرێبەستی کرێ 2026',cat:'گرێبەست',c:'#1E8FD5'},{name:'ناسنامەی خاوەن',cat:'ناسنامە',c:'#7A5BC0'},
+      {name:'پسوڵەی کرێ — نیسان',cat:'پسوڵە',c:'#2E9E6B'},{name:'قۆناغی خاوەندارێتی',cat:'خاوەندارێتی',c:'#E0A100'},
+    ];
+    const ownership=[
+      {to:'ئاکۆ مەحمود حسێن',from:'کۆمپانیا',date:'2019-08-12',price:'$95,000',doc:'گرێبەستی فرۆشتن',cur:true},
+      {to:'کۆمپانیا',from:'بنیاتنان',date:'2015-03-01',price:'—',doc:'قۆناغی خاوەندارێتی',cur:false},
+    ];
+    const flatTabs=[['bills','خزمەتگوزاری و فاتورە'],['payments','پارەدانەکان'],['documents','بەڵگەنامەکان'],['ownership','مێژووی خاوەندارێتی']].map(([id,label])=>({label, active:st.flatTab===id,
+      style:{padding:'11px 16px',fontSize:'13.5px',fontWeight:700,cursor:'pointer',borderBottom:'2.5px solid '+(st.flatTab===id?'#1E8FD5':'transparent'),color:st.flatTab===id?'#1577B8':'#6B7A90',transition:'all .15s'},
+      go:()=>this.setState({flatTab:id})}));
+
+    // owners
+    const ownersList=this.owners.map(o=>{ const fls=this.flats.filter(x=>x.owner===o.id); const debt=fls.reduce((s,x)=>s+(x.bal||0),0);
+      return {id:o.id, name:o.name, mobile:o.mobile, count:fls.length, debt, debtIqd:this.iqd(debt), debtUsd:this.usd(debt), initial:o.short[0],
+        debtC: debt>0?'#D1495B':'#2E9E6B', debtBg: debt>0?'#FCEDEF':'#E8F6EF',
+        go:()=>this.setState({staffScreen:'ownerProfile',ownerId:o.id})}; });
+    const op=this.owners.find(o=>o.id===st.ownerId)||this.owners[0];
+    const opFls=this.flats.filter(x=>x.owner===op.id);
+    const opDebt=opFls.reduce((s,x)=>s+(x.bal||0),0);
+    const opFlats=opFls.map(x=>{ const m=this.sm(x.status);
+      return {code:x.code, area:x.area+' م²', label:m.label, c:m.c, bg:m.bg, balIqd:this.iqd(x.bal||0), od:x.bal>0,
+        go:()=>this.setState({staffScreen:'flat',flatCode:x.code})}; });
+
+    // owner portal
+    const ownerNavDef=[['home','ماڵەوە','dashboard'],['money','حساب','cashbox'],['flats','شوقەکانم','buildings'],['payments','پارەدانەکان','payments'],['documents','بەڵگەنامە','documents'],['profile','پرۆفایل','owners']];
+    const ownerNav=ownerNavDef.map(([id,label,ic])=>{ const on=st.ownerScreen===id;
+      return {label, color: on?'#1E8FD5':'#9AA8BC', icon:this.icon(ic,on), go:()=>this.setState({ownerScreen:id})}; });
+    const ownerActivity=[
+      {dot:'#2E9E6B',title:'پارەدانی کرێ — B1-12-4',date:'2026-04-30',amt:'955,500 د.ع'},
+      {dot:'#1E8FD5',title:'فاتورەی مانگانە — B2-3-1',date:'2026-04-12',amt:'365,000 د.ع'},
+      {dot:'#E0A100',title:'فاتورەی نوێ — B1-12-4',date:'2026-06-01',amt:'440,000 د.ع'},
+    ];
+
+    // rent
+    const rentRows=this.flats.filter(x=>x.rent).map(x=>{ const od=x.bal>0; const ownerLabel=x.owner==='CO'?'کۆمپانیا':this.oName(x.owner);
+      return {code:x.code, owner:ownerLabel, tenant:x.tenant&&x.tenant!=='—'?x.tenant:'—', rentIqd:this.iqd(x.rent*this.RATE), rentUsd:'$'+x.rent.toLocaleString('en-US'),
+        contract:'12 مانگ', payDay:'ڕۆژی 1', od, statusLabel:od?'دواکەوتوو':'دراوە', statusC:od?'#D1495B':'#2E9E6B', statusBg:od?'#FCEDEF':'#E8F6EF',
+        go:()=>this.setState({staffScreen:'flat',flatCode:x.code})}; });
+    // bills (mixed model)
+    const billRaw=[
+      {code:'B1-12-4',e:320000,w:45000,g:25000,s:50000,paid:false},{code:'B1-12-2',e:210000,w:38000,g:25000,s:50000,paid:true},
+      {code:'B1-12-5',e:280000,w:52000,g:25000,s:50000,paid:true},{code:'B2-7-2',e:410000,w:60000,g:25000,s:50000,paid:false},
+      {code:'A1-9-1',e:350000,w:48000,g:25000,s:50000,paid:true},{code:'B2-3-1',e:190000,w:35000,g:25000,s:50000,paid:true},
+    ];
+    const billRows=billRaw.map(b=>{ const t=b.e+b.w+b.g+b.s; return {code:b.code, elec:this.iqd(b.e), water:this.iqd(b.w), gas:this.iqd(b.g), serv:this.iqd(b.s),
+      total:this.iqd(t), totalUsd:this.usd(t), statusLabel:b.paid?'دراوە':'چاوەڕوان', statusC:b.paid?'#2E9E6B':'#E0A100', statusBg:b.paid?'#E8F6EF':'#FBF3DA'}; });
+    // receipts
+    const receipts=[
+      {id:'RC-2026-0418',code:'B1-12-4',owner:'ئاکۆ مەحمود',type:'فاتورە',date:'2026-06-16',v:440000},
+      {id:'RC-2026-0417',code:'A1-9-1',owner:'کۆمپانیا',type:'کرێ',date:'2026-06-12',v:1176000},
+      {id:'RC-2026-0416',code:'B1-12-2',owner:'ئاسۆ نەژاد',type:'کرێ',date:'2026-06-10',v:882000},
+      {id:'RC-2026-0415',code:'B1-12-5',owner:'کۆمپانیا',type:'فاتورە',date:'2026-06-09',v:410000},
+      {id:'RC-2026-0414',code:'B2-3-1',owner:'ئاکۆ مەحمود',type:'فاتورە',date:'2026-06-08',v:365000},
+    ].map(r=>({...r, iqd:this.iqd(r.v), usd:this.usd(r.v), ...payTag(r.type)}));
+    // expenses
+    const expenseRows=[
+      {main:'سەرەکی',sub:'چاکسازی ئاسانسۆر — B2',to:'کۆمپانیای تەکنیک',date:'2026-06-11',v:1800000},
+      {main:'سەرەکی',sub:'کارەبای گشتی — هەموو عیمارەکان',to:'وەزارەتی کارەبا',date:'2026-06-05',v:2200000},
+      {main:'لاوەکی',sub:'پاککردنەوەی گشتی',to:'ڕێکخراوی خزمەت',date:'2026-06-09',v:450000},
+      {main:'لاوەکی',sub:'پێداویستی نووسینگە',to:'بازاڕ',date:'2026-06-02',v:120000},
+    ].map(e=>({...e, iqd:this.iqd(e.v), usd:this.usd(e.v), mainC:e.main==='سەرەکی'?'#7A5BC0':'#2BB3C0', mainBg:e.main==='سەرەکی'?'#F0EAFB':'#E6F7F9'}));
+    // cashbox
+    const ledger=[
+      {dir:'in',label:'پارەوەرگرتنی کرێ — B3-9-1',date:'2026-06-12',v:1176000},
+      {dir:'out',label:'چاکسازی ئاسانسۆر — B2',date:'2026-06-11',v:1800000},
+      {dir:'in',label:'کرێ — B1-12-2',date:'2026-06-10',v:882000},
+      {dir:'in',label:'فاتورە — B1-12-5',date:'2026-06-09',v:410000},
+      {dir:'out',label:'پاککردنەوەی گشتی',date:'2026-06-09',v:450000},
+    ].map(l=>({...l, iqd:this.iqd(l.v), c:l.dir==='in'?'#2E9E6B':'#D1495B', sign:l.dir==='in'?'+':'−', bg:l.dir==='in'?'#E8F6EF':'#FCEDEF'}));
+    // documents vault
+    const docVault=[
+      {name:'گرێبەستی کرێ — B1-12-4',cat:'گرێبەست',c:'#1E8FD5',meta:'PDF · 2026-01-04'},
+      {name:'ناسنامەی ئاکۆ مەحمود',cat:'ناسنامە',c:'#7A5BC0',meta:'JPG · 2024-09-12'},
+      {name:'پسوڵەی کرێ — نیسان',cat:'پسوڵە',c:'#2E9E6B',meta:'PDF · 2026-04-30'},
+      {name:'قۆناغی خاوەندارێتی — B1-12-4',cat:'خاوەندارێتی',c:'#E0A100',meta:'PDF · 2019-08-12'},
+      {name:'گرێبەستی کرێ — B2-7-2',cat:'گرێبەست',c:'#1E8FD5',meta:'PDF · 2026-01-01'},
+      {name:'ناسنامەی شیلان عەبدوڵڵا',cat:'ناسنامە',c:'#7A5BC0',meta:'JPG · 2023-02-20'},
+      {name:'پسوڵەی فاتورە — حوزەیران',cat:'پسوڵە',c:'#2E9E6B',meta:'PDF · 2026-06-09'},
+      {name:'قۆناغی خاوەندارێتی — B3-9-1',cat:'خاوەندارێتی',c:'#E0A100',meta:'PDF · 2018-05-03'},
+    ];
+    const usersList=[
+      {name:'هێرش ئەکاونتانت',user:'hersh.acc',role:'ژمێریار',initial:'ھـ',roleBg:'#EAF4FC',roleC:'#1577B8'},
+      {name:'بەختیار بەڕێوەبەر',user:'admin',role:'بەڕێوەبەر',initial:'بـ',roleBg:'#F0EAFB',roleC:'#7A5BC0'},
+      {name:'هاوژین یاریدەدەر',user:'hawzhin',role:'یاریدەدەر',initial:'هـ',roleBg:'#EEF2F7',roleC:'#6B7A90'},
+    ];
+    // reports
+    const reports=[
+      {title:'ڕاپۆرتی کۆکردنەوە',sub:'کۆی کۆکراوە بەپێی مانگ',bars:[60,72,80,88,84,95],c:'#1E8FD5'},
+      {title:'ڕاپۆرتی دواکەوتوو',sub:'گەشەی قەرز بەپێی مانگ',bars:[30,38,44,52,60,68],c:'#D1495B'},
+      {title:'ڕاپۆرت بەپێی عیمارە',sub:'بەراوردی داهات B1/B2/B3',bars:[80,64,72],c:'#2BB3C0'},
+      {title:'ڕاپۆرت بەپێی خاوەن',sub:'باشترین پارەدەران',bars:[90,70,55,40,30],c:'#2E9E6B'},
+    ];
+    // owner portal screens
+    const myFlats=this.flats.filter(x=>x.owner==='O1').map(x=>{ const m=this.sm(x.status);
+      return {code:x.code, sub:'عیمارە '+x.b+' · نهۆم '+x.fl+' · '+x.area+' م²', label:m.label, c:m.c, bg:m.bg,
+        tenant: (x.tenant&&x.tenant!=='—')?('کرێچی: '+x.tenant):'', rentInfo: x.rent?('$'+x.rent+'/مانگ'):'',
+        balIqd:this.iqd(x.bal||0), od:x.bal>0, balC:x.bal>0?'#D1495B':'#2E9E6B', balBg:x.bal>0?'#FCEDEF':'#E8F6EF',
+        go:()=>this.setState({ownerScreen:'flatDetail',ownerFlatCode:x.code})}; });
+    const of=this.flats.find(x=>x.code===st.ownerFlatCode)||this.flats[3];
+    const ofm=this.sm(of.status);
+    const myPayments=[
+      {date:'2026-04-30',code:'B1-12-4',type:'کرێ',v:955500},{date:'2026-04-12',code:'B2-3-1',type:'فاتورە',v:365000},
+      {date:'2026-03-30',code:'B1-12-4',type:'کرێ',v:955500},{date:'2026-03-05',code:'B1-12-4',type:'فاتورە',v:402000},
+      {date:'2026-02-28',code:'B1-12-4',type:'کرێ',v:955500},
+    ].map(p=>({...p, iqd:this.iqd(p.v), usd:this.usd(p.v), ...payTag(p.type)}));
+    const myDocs=[
+      {name:'گرێبەستی کرێ — B1-12-4',cat:'گرێبەست',c:'#1E8FD5'},{name:'پسوڵەی کرێ — نیسان',cat:'پسوڵە',c:'#2E9E6B'},
+      {name:'قۆناغی خاوەندارێتی — B2-3-1',cat:'خاوەندارێتی',c:'#E0A100'},{name:'ناسنامەی خاوەن',cat:'ناسنامە',c:'#7A5BC0'},
+    ];
+
+    // ===== added modules: data =====
+    const RATEx=this.RATE;
+    const fUsd=(u)=>'$'+Number(u).toLocaleString('en-US');
+    const fIqd=(u)=>Number(Math.round(u*RATEx)).toLocaleString('en-US')+' د.ع';
+    const fIqdRaw=(n)=>Number(n).toLocaleString('en-US')+' د.ع';
+
+    // قیست / mortgage (flat purchase) — values in USD
+    const mortRaw=[
+      {code:'B1-3-2', buyer:'شیلان عەبدوڵڵا کەریم', total:95000, paid:61000, monthly:1200, term:'28 مانگ ماوە'},
+      {code:'B2-7-2', buyer:'کاروان جەلال محەمەد', total:120000, paid:88000, monthly:1500, term:'21 مانگ ماوە'},
+      {code:'A1-21-6', buyer:'دیلان عومەر ساڵح', total:78000, paid:24000, monthly:900, term:'60 مانگ ماوە'},
+      {code:'B2-3-1', buyer:'ئاکۆ مەحمود حسێن', total:110000, paid:110000, monthly:0, term:'تەواوبوو'},
+    ];
+    const mortgages=mortRaw.map(m=>{ const rem=m.total-m.paid; const pct=Math.round(m.paid/m.total*100); const done=rem<=0;
+      return {code:m.code, buyer:m.buyer, totalUsd:fUsd(m.total), remUsd:fUsd(rem), pct:pct+'%', term:m.term,
+        barC:done?'#2E9E6B':'#1E8FD5', statusLabel:done?'تەواوبوو':'چالاک', statusC:done?'#2E9E6B':'#1577B8', statusBg:done?'#E8F6EF':'#EAF4FC'}; });
+    const mTot=mortRaw.reduce((a,m)=>a+m.total,0), mPaid=mortRaw.reduce((a,m)=>a+m.paid,0);
+    const mortgageSummary={totalUsd:fUsd(mTot), totalIqd:fIqd(mTot), paidUsd:fUsd(mPaid), paidIqd:fIqd(mPaid), remUsd:fUsd(mTot-mPaid), remIqd:fIqd(mTot-mPaid)};
+    const mortgageHistory=[
+      {n:'#34', date:'2026-06-01', code:'B1-3-2', amt:1200},{n:'#21', date:'2026-06-01', code:'B2-7-2', amt:1500},
+      {n:'#10', date:'2026-05-28', code:'A1-21-6', amt:900},{n:'#33', date:'2026-05-01', code:'B1-3-2', amt:1200},
+      {n:'#20', date:'2026-05-01', code:'B2-7-2', amt:1500},
+    ].map(h=>({...h, amtUsd:fUsd(h.amt)}));
+
+    // کاڵا / items sold to a flat — IQD
+    const itemRaw=[
+      {name:'سیمەنت (کیسە)', code:'B1-12-4', unit:8000, qty:20, date:'2026-06-11', paid:true},
+      {name:'بۆیە (گاڵن)', code:'B2-7-2', unit:15000, qty:6, date:'2026-06-09', paid:false},
+      {name:'لۆلەی ئاو', code:'A1-9-1', unit:5000, qty:12, date:'2026-06-05', paid:true},
+      {name:'پلگ و وایەری کارەبا', code:'B1-3-2', unit:2500, qty:30, date:'2026-06-02', paid:true},
+    ];
+    const itemsRows=itemRaw.map(it=>{ const t=it.unit*it.qty; return {name:it.name, code:it.code, unit:fIqdRaw(it.unit), qty:it.qty,
+      total:fIqdRaw(t), totalUsd:this.usd(t), date:it.date, statusLabel:it.paid?'دراوە':'قەرز', statusC:it.paid?'#2E9E6B':'#D1495B', statusBg:it.paid?'#E8F6EF':'#FCEDEF'}; });
+    const itemsTotal=fIqdRaw(itemRaw.reduce((a,it)=>a+it.unit*it.qty,0));
+
+    // داهاتی جۆراوجۆر / misc income — IQD
+    const incRaw=[
+      {type:'کرێی پارکینگ', src:'B1 — پارکینگ', date:'2026-06-12', note:'مانگانە', v:450000},
+      {type:'کرێی هۆڵی ئاهەنگ', src:'هۆڵی گشتی', date:'2026-06-08', note:'یەک ڕۆژ', v:300000},
+      {type:'غەرامەی دواکەوتن', src:'B2-7-2', date:'2026-06-05', note:'سزا', v:120000},
+      {type:'کرێی بیلبۆردی ڕیکلام', src:'دیواری دەرەوە', date:'2026-06-02', note:'ڕیکلام', v:600000},
+    ];
+    const incomeRows=incRaw.map(r=>({...r, iqd:fIqdRaw(r.v), usd:this.usd(r.v)}));
+    const incomeTotal=fIqdRaw(incRaw.reduce((a,r)=>a+r.v,0));
+
+    // دابینکەر / suppliers (for expenses) — IQD
+    const suppliers=[
+      {name:'کۆمپانیای ئاسۆ بۆ کارەبا', phone:'07701112233', sup:'کەرەستەی کارەبا', total:3200000},
+      {name:'بازرگانی ڕۆژهەڵات', phone:'07509988776', sup:'سیمەنت و بلۆک', total:5400000},
+      {name:'گرووپی نوێ بۆ ئاو', phone:'07712345678', sup:'سیستەمی ئاو', total:1800000},
+    ].map(s=>({...s, iqd:fIqdRaw(s.total), initial:(s.name.trim()[0]||'•')}));
+
+    // کەشف حساب / account statement for one flat (B1-12-4) — IQD
+    const stmtRaw=[
+      {date:'2026-01-01', desc:'باڵانسی سەرەتا', type:'—', debit:0, credit:0},
+      {date:'2026-03-05', desc:'فاتورەی خزمەتگوزاری — ئازار', type:'فاتورە', debit:402000, credit:0},
+      {date:'2026-03-30', desc:'کرێی ئازار', type:'کرێ', debit:955500, credit:0},
+      {date:'2026-04-02', desc:'پارەدان — کرێ', type:'پارەدان', debit:0, credit:955500},
+      {date:'2026-04-05', desc:'کاڵا — سیمەنت', type:'کاڵا', debit:160000, credit:0},
+      {date:'2026-05-01', desc:'فاتورەی خزمەتگوزاری — نیسان', type:'فاتورە', debit:440000, credit:0},
+      {date:'2026-05-03', desc:'پارەدان — فاتورە', type:'پارەدان', debit:0, credit:600000},
+    ];
+    let run=0; const statementRows=stmtRaw.map(r=>{ run+=r.debit-r.credit; const tg=payTag(r.type);
+      return {date:r.date, desc:r.desc, type:r.type, tagBg:tg.tagBg, tagC:tg.tagC,
+        debit:r.debit?fIqdRaw(r.debit):'—', credit:r.credit?fIqdRaw(r.credit):'—', bal:fIqdRaw(run)}; });
+    const statementBal=fIqdRaw(run);
+    const stmtFlat=this.flats.find(x=>x.code==='B1-12-4')||{};
+    const statementFlat={code:'B1-12-4', owner:this.oFull(stmtFlat.owner||'O1'), balC:run>0?'#D1495B':'#2E9E6B'};
+    // کارمەندان / employees — salaries count as monthly expense
+    const empRaw=[
+      {name:'هێرش ئەکاونتانت', role:'ژمێریار', salary:1400000},
+      {name:'ئاراس مەحمود', role:'بەڕێوەبەری گشتی', salary:2200000},
+      {name:'شادان ئەحمەد', role:'پارێزەری یاسایی', salary:1800000},
+      {name:'دلێر عومەر', role:'سەرپەرشتیاری چاککردنەوە', salary:1100000},
+      {name:'بیلال کەریم', role:'پاسەوان', salary:750000},
+      {name:'ڕۆژان ساڵح', role:'خاوێنکەرەوە', salary:600000},
+    ];
+    const employees=empRaw.map((e,i)=>({...e, iqd:fIqdRaw(e.salary), usd:this.usd(e.salary), initial:(e.name.trim()[0]||'•'),
+      avBg:['#EAF4FC','#E8F6EF','#F0EAFB','#E6F7F9','#FBF3DA','#FCEDEF'][i%6], avC:['#1577B8','#2E9E6B','#7A5BC0','#1f8a96','#A57C00','#D1495B'][i%6]}));
+    const empTotal=fIqdRaw(empRaw.reduce((a,e)=>a+e.salary,0));
+    const empCount=empRaw.length;
+    // owner money / period summary
+    const ownerPeriodsDef=[['today','ئەمڕۆ'],['yesterday','دوێنێ'],['week','ئەم هەفتە'],['month','ئەم مانگ'],['lastmonth','مانگی ڕابردوو'],['custom','بەروار تایبەت']];
+    const ownerPeriods=ownerPeriodsDef.map(([id,label])=>{ const on=st.ownerPeriod===id; return {label, bg:on?'#1E8FD5':'#fff', c:on?'#fff':'#6B7A90', bd:on?'#1E8FD5':'#E3E9F2', go:()=>this.setState({ownerPeriod:id})}; });
+    const pInfo={
+      today:{paid:0,rent:0,bill:0,mort:0,item:0,txns:[]},
+      yesterday:{paid:150000,rent:0,bill:150000,mort:0,item:0,txns:[['پارەدانی فاتورە — B1-12-4','2026-06-15',150000,'#1577B8']]},
+      week:{paid:955500,rent:955500,bill:0,mort:0,item:0,txns:[['پارەدانی کرێ — B1-12-4','2026-06-12',955500,'#2E9E6B']]},
+      month:{paid:1357500,rent:955500,bill:402000,mort:0,item:0,txns:[['کرێ — B1-12-4','2026-06-12',955500,'#2E9E6B'],['فاتورە — B2-3-1','2026-06-08',402000,'#1577B8']]},
+      lastmonth:{paid:1320000,rent:900000,bill:420000,mort:0,item:0,txns:[['کرێی نیسان','2026-05-28',900000,'#2E9E6B'],['فاتورەی نیسان','2026-05-10',420000,'#1577B8']]},
+      custom:{paid:2800000,rent:1855500,bill:744000,mort:200000,item:0,txns:[['کۆی ماوەی هەڵبژێردراو','2026-01-01 → 2026-06-16',2800000,'#7A5BC0']]},
+    };
+    const pp=pInfo[st.ownerPeriod]||pInfo.month;
+    const ownerMoney={ paidIqd:fIqdRaw(pp.paid), paidUsd:this.usd(pp.paid), owedIqd:fIqdRaw(440000), owedUsd:this.usd(440000),
+      rent:fIqdRaw(pp.rent), bill:fIqdRaw(pp.bill), mort:fIqdRaw(pp.mort), item:fIqdRaw(pp.item),
+      isCustom: st.ownerPeriod==='custom', empty: pp.txns.length===0,
+      txns: pp.txns.map(a=>({t:a[0], d:a[1], v:fIqdRaw(a[2]), c:a[3]})) };
+    // ===== end added modules data =====
+
+    return {
+      cityName: this.props.cityName || 'Chawy Slemani',
+      scr_mortgage: st.staffScreen==='mortgage', scr_items: st.staffScreen==='items',
+      scr_income: st.staffScreen==='income', scr_statement: st.staffScreen==='statement',
+      mortgages, mortgageSummary, mortgageHistory,
+      itemsRows, itemsTotal, incomeRows, incomeTotal, suppliers,
+      statementRows, statementFlat, statementBal,
+      scr_employees: st.staffScreen==='employees', employees, empTotal, empCount,
+      doPrint: ()=>this.doPrint(),
+      exportEmp: ()=>this.csv('کارمەندان', [['کارمەند','پۆست','مووچەی مانگانە']].concat(empRaw.map(e=>[e.name,e.role,e.salary]))),
+      exportExpenses: ()=>this.csv('خەرجی', [['جۆر','خەرجی','وەرگر','بەروار','بڕی پارە']].concat(expenseRows.map(e=>[e.main,e.sub,e.to,e.date,e.v]))),
+      exportIncome: ()=>this.csv('داهاتی-جۆراوجۆر', [['جۆری داهات','سەرچاوە','بەروار','تێبینی','بڕی پارە']].concat(incRaw.map(r=>[r.type,r.src,r.date,r.note,r.v]))),
+      exportMortgage: ()=>this.csv('قیست-مۆرگەج', [['شوقە','کڕیار','کۆی نرخ','دراوە','مانگانە']].concat(mortRaw.map(m=>[m.code,m.buyer,m.total,m.paid,m.monthly]))),
+      exportItems: ()=>this.csv('کاڵا', [['کاڵا','شوقە','بەهای یەکە','بڕ','کۆ']].concat(itemRaw.map(it=>[it.name,it.code,it.unit,it.qty,it.unit*it.qty]))),
+      exportStatement: ()=>this.csv('کەشف-حساب-B1-12-4', [['بەروار','وەسف','جۆر','چارج','پارەدان']].concat(stmtRaw.map(r=>[r.date,r.desc,r.type,r.debit,r.credit]))),
+      rateStr: this.RATE.toLocaleString('en-US'),
+      showStaffApp: staff && st.staffAuthed,
+      showStaffLogin: staff && !st.staffAuthed,
+      showOwnerApp: !staff && st.ownerAuthed,
+      showOwnerLogin: !staff && !st.ownerAuthed,
+      staffTabStyle: tab(staff), ownerTabStyle: tab(!staff),
+      toStaff: ()=>this.setState({mode:'staff'}), toOwner: ()=>this.setState({mode:'owner'}),
+      staffLogin: ()=>this.setState({staffAuthed:true}), staffLogout: ()=>this.setState({staffAuthed:false}),
+      ownerLogin: ()=>this.setState({ownerAuthed:true}), ownerLogout: ()=>this.setState({ownerAuthed:false}),
+      pageTitle: ti[0], pageSub: ti[1],
+      nav: [
+        navItem('dashboard','داشبۆرد','dashboard'), navItem('buildings','عیمارە و شوقەکان','buildings'),
+        navItem('owners','خاوەنەکان','owners'), navItem('rent','کرێ','rent'),
+        navItem('mortgage','قیست (مۆرگەج)','mortgage'),
+        navItem('bills','خزمەتگوزاری و فاتورە','bills'), navItem('items','کاڵا','items'),
+        navItem('payments','پارەوەرگرتن و پسوڵە','payments'), navItem('statement','کەشف حساب','statement'),
+        navItem('overdue','بیرخەرەوە','overdue',37), navItem('documents','بەڵگەنامە','documents'),
+        navItem('expenses','خەرجی','expenses'), navItem('income','داهاتی جۆراوجۆر','income'),
+        navItem('employees','کارمەندان','employees'),
+        navItem('cashbox','صندوق','cashbox'),
+        navItem('reports','ڕاپۆرت','reports'), navItem('settings','ڕێکخستن','settings'),
+      ],
+      scr_dashboard: st.staffScreen==='dashboard', scr_overdue: st.staffScreen==='overdue',
+      scr_buildings: st.staffScreen==='buildings', building: st.building, floor: st.floor,
+      scr_flat: st.staffScreen==='flat', scr_owners: st.staffScreen==='owners',
+      scr_ownerProfile: st.staffScreen==='ownerProfile', scr_rent: st.staffScreen==='rent',
+      scr_bills: st.staffScreen==='bills', scr_payments: st.staffScreen==='payments',
+      scr_documents: st.staffScreen==='documents', scr_expenses: st.staffScreen==='expenses',
+      scr_cashbox: st.staffScreen==='cashbox', scr_reports: st.staffScreen==='reports',
+      scr_settings: st.staffScreen==='settings',
+      kpis: [
+        {label:'عیمارەکان',value:'3',color:'#1E8FD5'},{label:'شوقەکان',value:'276',color:'#1B2A41'},
+        {label:'نیشتەجێ بە خاوەن',value:'64',color:'#1E8FD5'},{label:'بەکرێدراو',value:'132',color:'#2E9E6B'},
+        {label:'موڵکی کۆمپانیا',value:'52',color:'#2BB3C0'},{label:'بەتاڵ',value:'28',color:'#9AA8BC'},
+      ],
+      donut, trend, recentPayments, dashOverdue, overdueRows, bChips,
+      goPayments: ()=>this.navTo('payments'), goOverdue: ()=>this.navTo('overdue'),
+      buildings, floors, gridFlats, legend,
+      flat: {code:f.code, area:f.area, b:f.b, fl:f.fl, statusLabel:fm.label, statusC:fm.c, statusBg:fm.bg,
+        ownerName:fOwner.name, ownerMobile:fOwner.mobile, ownerInitial:fOwner.short[0],
+        rented:isRented, tenant:f.tenant||'—',
+        hasRent: !!f.rent, rentIqd: f.rent?this.iqd(f.rent*this.RATE):'—', rentUsd: f.rent?('$'+f.rent.toLocaleString('en-US')+'/مانگ'):'',
+        balIqd:this.iqd(f.bal||0), balUsd:this.usd(f.bal||0), bal:f.bal||0,
+        balC:(f.bal>0)?'#D1495B':'#2E9E6B', balBg:(f.bal>0)?'#FCEDEF':'#E8F6EF', balWord:(f.bal>0)?'قەرز':'پاککراوە'},
+      openFlatOwner: ()=>this.setState({staffScreen:'ownerProfile',ownerId:f.owner}),
+      flatTabs, ftab_bills:st.flatTab==='bills', ftab_payments:st.flatTab==='payments', ftab_documents:st.flatTab==='documents', ftab_ownership:st.flatTab==='ownership',
+      billBreak, billTotalIqd:this.iqd(440000), billTotalUsd:this.usd(440000), flatPays, flatDocs, ownership,
+      ownersList, ownerDetail: {name:op.name, mobile:op.mobile, initial:op.short[0], count:opFls.length,
+        debtIqd:this.iqd(opDebt), debtUsd:this.usd(opDebt), debt:opDebt, paidIqd:this.iqd(3820000), paidUsd:this.usd(3820000),
+        debtC: opDebt>0?'#D1495B':'#2E9E6B'}, opFlats,
+      rentRows, billRows, receipts, expenseRows, expenseTotalIqd:this.iqd(4570000), expenseTotalUsd:this.usd(4570000), ledger,
+      cashBalanceIqd:this.iqd(186420000), cashBalanceUsd:this.usd(186420000), incomeIqd:this.iqd(142500000), expenseSumIqd:this.iqd(38600000), reports,
+      myFlats, myPayments, myDocs, docVault, usersList,
+      openUpload: ()=>this.setState({modal:'upload'}), openExpense: ()=>this.setState({modal:'expense'}),
+      modalUpload: st.modal==='upload', modalExpense: st.modal==='expense',
+      ownerFlat: {code:of.code, statusLabel:ofm.label, statusC:ofm.c, statusBg:ofm.bg, sub:'عیمارە '+of.b+' · نهۆم '+of.fl+' · '+of.area+' م²',
+        balIqd:this.iqd(of.bal||0), balUsd:this.usd(of.bal||0), bal:of.bal||0, balC:of.bal>0?'#D1495B':'#2E9E6B', balBg:of.bal>0?'#FCEDEF':'#E8F6EF',
+        rented: of.status==='rented'||(of.status==='company'&&of.tenant&&of.tenant!=='—'), tenant:of.tenant||'—', rentUsd: of.rent?('$'+of.rent+'/مانگ'):''},
+      goOwnerHome: ()=>this.setState({ownerScreen:'home'}), goOwnerDocs: ()=>this.setState({ownerScreen:'documents'}),
+      // owner
+      oscr_home: st.ownerScreen==='home', oscr_flats: st.ownerScreen==='flats',
+      oscr_flatDetail: st.ownerScreen==='flatDetail', oscr_payments: st.ownerScreen==='payments',
+      oscr_documents: st.ownerScreen==='documents', oscr_profile: st.ownerScreen==='profile',
+      ownerNav, ownerActivity, phoneStatusColor:'#1B2A41',
+      goOwnerFlats: ()=>this.setState({ownerScreen:'flats'}), goOwnerPayments: ()=>this.setState({ownerScreen:'payments'}),
+      oscr_money: st.ownerScreen==='money', ownerPeriods, ownerMoney,
+      // modals
+      modalPayment: st.modal==='payment', modalReceipt: st.modal==='receipt',
+      closeModal: ()=>this.setState({modal:null}), stop: (e)=>e.stopPropagation(),
+      openPayment: ()=>this.setState({modal:'payment'}),
+      confirmPayment: ()=>this.setState({modal:'receipt'}),
+      openBill: ()=>this.setState({modal:'bill'}),
+      goBuildings: ()=>this.navTo('buildings'), goOwners: ()=>this.navTo('owners'), ownerDot:'#1E8FD5',
+      modalBill: st.modal==='bill',
+    };
+  }
+}
+</script>
+</body>
+</html>
