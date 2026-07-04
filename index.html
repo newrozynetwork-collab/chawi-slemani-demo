@@ -34,7 +34,7 @@
   }
 </style>
 </helmet>
-<div dir="rtl" style="height:100vh;display:flex;flex-direction:column;background:radial-gradient(58% 48% at 86% -2%, rgba(30,143,213,.13), transparent 60%), radial-gradient(52% 46% at 6% 8%, rgba(21,195,201,.11), transparent 62%), #EEF2F8;overflow:hidden;">
+<div dir="rtl" style="height:100vh;display:flex;flex-direction:column;background:radial-gradient(56% 46% at 88% -4%, rgba(30,143,213,.17), transparent 60%), radial-gradient(48% 42% at 4% 6%, rgba(22,195,201,.13), transparent 62%), radial-gradient(52% 56% at 55% 110%, rgba(124,92,236,.08), transparent 62%), #EEF2F8;overflow:hidden;">
 
   <div class="no-print" style="height:56px;background:#fff;border-bottom:1px solid #E3E9F2;display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;position:relative;z-index:30;box-shadow:0 1px 0 rgba(27,42,65,.02);">
     <div style="display:flex;align-items:center;gap:11px;">
@@ -52,10 +52,10 @@
 
   <sc-if value="{{ showStaffApp }}" hint-placeholder-val="{{ true }}">
     <div style="display:flex;flex:1;min-height:0;">
-      <div class="no-print" style="width:250px;flex-shrink:0;background:#fff;border-left:1px solid #E3E9F2;display:flex;flex-direction:column;min-height:0;">
+      <div class="no-print" style="width:252px;flex-shrink:0;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border:1px solid rgba(227,233,242,.95);border-radius:22px;margin:14px 14px 14px 7px;box-shadow:0 26px 60px -34px rgba(14,26,43,.45);display:flex;flex-direction:column;min-height:0;overflow:hidden;">
         <div style="display:flex;flex-direction:column;gap:3px;padding:14px 12px;overflow-y:auto;flex:1;">
           <sc-for list="{{ nav }}" as="item" hint-placeholder-count="12">
-            <button onClick="{{ item.go }}" style="{{ item.style }}">
+            <button onClick="{{ item.go }}" style="{{ item.style }}" style-hover="transform:translateX(-3px)">
               <span style="width:22px;display:flex;justify-content:center;align-items:center;">{{ item.icon }}</span>
               <span style="flex:1;text-align:right;font-size:13.5px;font-weight:600;">{{ item.label }}</span>
               <sc-if value="{{ item.badge }}"><span style="background:#D1495B;color:#fff;font-size:10.5px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px;">{{ item.badge }}</span></sc-if>
@@ -63,17 +63,17 @@
           </sc-for>
         </div>
         <div style="padding:12px;border-top:1px solid #EEF2F7;display:flex;align-items:center;gap:10px;">
-          <div style="width:38px;height:38px;border-radius:11px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">ھـ</div>
+          <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#1E8FD5,#16C3C9);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">{{ sideUserInit }}</div>
           <div style="flex:1;line-height:1.2;">
-            <div style="font-size:13px;font-weight:700;color:#1B2A41;">هێرش ئەکاونتانت</div>
-            <div style="font-size:11px;color:#6B7A90;">ژمێریار</div>
+            <div style="font-size:13px;font-weight:700;color:#1B2A41;">{{ sideUserName }}</div>
+            <div style="font-size:11px;color:#6B7A90;">{{ sideUserRole }}</div>
           </div>
           <button onClick="{{ staffLogout }}" title="چوونەدەرەوە" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;display:flex;align-items:center;justify-content:center;color:#6B7A90;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
         </div>
       </div>
 
-      <div style="flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;">
-        <div class="no-print" style="height:64px;flex-shrink:0;background:#fff;border-bottom:1px solid #E3E9F2;display:flex;align-items:center;justify-content:space-between;padding:0 26px;gap:18px;">
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;margin:14px 7px 14px 14px;border-radius:22px;overflow:hidden;border:1px solid rgba(227,233,242,.9);background:rgba(255,255,255,.55);box-shadow:0 26px 60px -34px rgba(14,26,43,.4);">
+        <div class="no-print" style="height:64px;flex-shrink:0;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(227,233,242,.8);display:flex;align-items:center;justify-content:space-between;padding:0 26px;gap:18px;">
           <div style="display:flex;flex-direction:column;line-height:1.2;">
             <span style="font-size:18px;font-weight:800;color:#1B2A41;">{{ pageTitle }}</span>
             <span style="font-size:11.5px;color:#6B7A90;">{{ pageSub }}</span>
@@ -97,7 +97,7 @@
             <div style="display:flex;flex-direction:column;gap:18px;max-width:1280px;">
               <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:14px;">
                 <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="6">
-                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);">
+                  <div style="background:#fff;border:1px solid #E3E9F2;border-radius:14px;padding:15px 16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);transition:transform .18s ease, box-shadow .18s ease;" style-hover="transform:translateY(-3px);box-shadow:0 4px 8px rgba(14,26,43,.06),0 22px 40px -20px rgba(14,26,43,.3)">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
                       <span style="font-size:12.5px;color:#6B7A90;font-weight:600;">{{ k.label }}</span>
                       <span style="width:9px;height:9px;border-radius:3px;background:{{ k.color }};"></span>
@@ -333,7 +333,7 @@
                     </div>
                   </div>
                   <div style="display:flex;gap:10px;margin-top:22px;">
-                    <button onClick="{{ openPayment }}" style="height:46px;padding:0 20px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 20px -10px rgba(46,158,107,.5);"><span style="font-size:18px;">+</span> تۆمارکردنی پارەدان</button>
+                    <button onClick="{{ openPayment }}" style="height:46px;padding:0 20px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 20px -10px rgba(46,158,107,.5);"><span style="font-size:18px;">+</span> تۆمارکردنی پارەدان</button>
                     <button onClick="{{ openPayment }}" style="height:46px;padding:0 20px;border-radius:12px;background:#EAF4FC;color:#1577B8;font-weight:800;font-size:14px;border:1px solid #D3E7F8;">دروستکردنی پسوڵە</button>
                   </div>
                 </div>
@@ -442,7 +442,7 @@
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6B7A90" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>
                   <input placeholder="گەڕان بە ناو یان مۆبایل…" style="border:none;outline:none;flex:1;font-size:14px;background:none;"/>
                 </div>
-                <button style="height:46px;padding:0 20px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ زیادکردنی خاوەن</button>
+                <button style="height:46px;padding:0 20px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">+ زیادکردنی خاوەن</button>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
                 <div style="display:grid;grid-template-columns:2fr 1.3fr 1fr 1.2fr 40px;gap:12px;padding:13px 20px;font-size:11.5px;color:#6B7A90;font-weight:700;background:#FAFBFD;border-bottom:1px solid #EEF2F7;">
@@ -533,7 +533,7 @@
                 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                   <button onClick="{{ doPrint }}" style="height:42px;padding:0 14px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
                   <button onClick="{{ exportBills }}" style="height:42px;padding:0 14px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
-                  <button onClick="{{ openBill }}" style="height:42px;padding:0 18px;border-radius:11px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13.5px;">+ دروستکردنی فاتورەی مانگانە</button>
+                  <button onClick="{{ openBill }}" style="height:42px;padding:0 18px;border-radius:11px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:13.5px;">+ دروستکردنی فاتورەی مانگانە</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -570,7 +570,7 @@
                   </div>
                   <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">تێبینی</label><input id="pm_note" placeholder="تێبینی…" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
                   <sc-if value="{{ payError }}"><div style="background:#FCEDEF;color:#D1495B;font-size:12.5px;font-weight:700;border-radius:10px;padding:10px 13px;text-align:center;">{{ payError }}</div></sc-if>
-                  <button onClick="{{ confirmPayment }}" style="height:48px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:15px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);margin-top:4px;">{{ payBtnLabel }}</button>
+                  <button onClick="{{ confirmPayment }}" style="height:48px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:15px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);margin-top:4px;">{{ payBtnLabel }}</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -610,7 +610,7 @@
                   <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">پسوڵە</span>
                   <span style="font-size:12.5px;font-weight:700;background:#fff;color:#6B7A90;border:1px solid #E3E9F2;padding:9px 14px;border-radius:9px;">خاوەندارێتی</span>
                 </div>
-                <button onClick="{{ openUpload }}" style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13.5px;">+ بارکردنی بەڵگەنامە</button>
+                <button onClick="{{ openUpload }}" style="height:46px;padding:0 18px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:13.5px;">+ بارکردنی بەڵگەنامە</button>
               </div>
               <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
                 <sc-for list="{{ docVault }}" as="d" hint-placeholder-count="8">
@@ -638,7 +638,7 @@
                   <button onClick="{{ sortExpensesB }}" style="height:46px;padding:0 13px;border-radius:12px;background:#F4F7FB;color:#1B2A41;font-weight:700;font-size:12.5px;border:1px solid #E3E9F2;">{{ sortExpensesL }}</button>
                   <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
                   <button onClick="{{ exportExpenses }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
-                  <button onClick="{{ openExpense }}" style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی خەرجی</button>
+                  <button onClick="{{ openExpense }}" style="height:46px;padding:0 18px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی خەرجی</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -731,7 +731,7 @@
                 <label style="font-size:12.5px;font-weight:700;color:#6B7A90;">$1 = چەند دینار</label>
                 <div style="display:flex;gap:10px;margin-top:8px;">
                   <input id="rate_in" placeholder="{{ rateStr }}" style="flex:1;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:16px;font-weight:800;outline:none;"/>
-                  <button onClick="{{ saveRate }}" style="height:46px;padding:0 20px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">پاشەکەوت</button>
+                  <button onClick="{{ saveRate }}" style="height:46px;padding:0 20px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">پاشەکەوت</button>
                 </div>
                 <div style="margin-top:14px;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:11px;padding:12px 14px;font-size:12.5px;color:#1577B8;">گۆڕینی ئەم نرخە کاریگەری دەکاتە سەر هەموو بەهای دۆلار لە سیستەمدا.</div>
               </div>
@@ -744,12 +744,13 @@
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);grid-column:span 2;">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-size:15px;font-weight:800;color:#1B2A41;">بەکارهێنەران</span><button style="font-size:12.5px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 13px;">+ بەکارهێنەری نوێ</button></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-size:15px;font-weight:800;color:#1B2A41;">بەکارهێنەران و دەسەڵاتەکان</span><button onClick="{{ openUser }}" style="font-size:12.5px;font-weight:700;color:#1577B8;background:#EAF4FC;border:1px solid #D3E7F8;border-radius:9px;padding:8px 13px;">+ بەکارهێنەری نوێ</button></div>
                 <sc-for list="{{ usersList }}" as="u" hint-placeholder-count="3">
                   <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #F4F7FB;">
                     <span style="width:38px;height:38px;border-radius:11px;background:#1B2A41;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;">{{ u.initial }}</span>
                     <div style="flex:1;line-height:1.3;"><div style="font-size:13.5px;font-weight:700;color:#1B2A41;">{{ u.name }}</div><div style="font-size:11.5px;color:#6B7A90;">{{ u.user }}</div></div>
                     <span style="background:{{ u.roleBg }};color:{{ u.roleC }};font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:8px;">{{ u.role }}</span>
+                    <sc-if value="{{ u.canEdit }}"><button onClick="{{ u.edit }}" style="margin-inline-start:8px;background:#F4F7FB;border:1px solid #E3E9F2;color:#1B2A41;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;">گۆڕین</button></sc-if>
                   </div>
                 </sc-for>
               </div>
@@ -778,7 +779,7 @@
                     </div>
                     <div style="display:flex;gap:8px;">
                       <input id="cat_i" placeholder="جۆری نوێ…" style="flex:1;height:42px;border:1px solid #E3E9F2;border-radius:11px;background:#FAFBFD;padding:0 13px;font-size:13px;outline:none;"/>
-                      <button onClick="{{ addCatI }}" style="height:42px;padding:0 15px;border-radius:11px;background:#2E9E6B;color:#fff;font-weight:800;font-size:13px;">+ زیادکردن</button>
+                      <button onClick="{{ addCatI }}" style="height:42px;padding:0 15px;border-radius:11px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:13px;">+ زیادکردن</button>
                     </div>
                   </div>
                 </div>
@@ -851,7 +852,7 @@
                   <button onClick="{{ sortItemsB }}" style="height:46px;padding:0 13px;border-radius:12px;background:#F4F7FB;color:#1B2A41;font-weight:700;font-size:12.5px;border:1px solid #E3E9F2;">{{ sortItemsL }}</button>
                   <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
                   <button onClick="{{ exportItems }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
-                  <button onClick="{{ openItem }}" style="height:46px;padding:0 18px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی کاڵا</button>
+                  <button onClick="{{ openItem }}" style="height:46px;padding:0 18px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی کاڵا</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -879,7 +880,7 @@
                   <button onClick="{{ sortIncomesB }}" style="height:46px;padding:0 13px;border-radius:12px;background:#F4F7FB;color:#1B2A41;font-weight:700;font-size:12.5px;border:1px solid #E3E9F2;">{{ sortIncomesL }}</button>
                   <button onClick="{{ doPrint }}" style="height:46px;padding:0 15px;border-radius:12px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;">چاپ / PDF</button>
                   <button onClick="{{ exportIncome }}" style="height:46px;padding:0 15px;border-radius:12px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;">Excel</button>
-                  <button onClick="{{ openIncome }}" style="height:46px;padding:0 18px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی داهات</button>
+                  <button onClick="{{ openIncome }}" style="height:46px;padding:0 18px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:14px;">+ تۆمارکردنی داهات</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -907,7 +908,7 @@
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
                   <input id="st_flat" placeholder="کۆدی شوقە… B2-7-2" style="width:150px;height:42px;border:1px solid #E3E9F2;border-radius:11px;background:#FAFBFD;padding:0 13px;font-size:13px;font-weight:700;outline:none;"/>
-                  <button onClick="{{ loadStatement }}" style="height:42px;padding:0 16px;border-radius:11px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13px;">{{ stmtBtnLabel }}</button>
+                  <button onClick="{{ loadStatement }}" style="height:42px;padding:0 16px;border-radius:11px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:13px;">{{ stmtBtnLabel }}</button>
                   <div style="text-align:left;line-height:1.2;margin-inline-start:8px;"><span style="font-size:11.5px;color:#6B7A90;">باڵانسی کۆتایی</span><div style="font-size:20px;font-weight:900;color:{{ statementFlat.balC }};">{{ statementBal }}</div></div>
                   <button onClick="{{ exportStatement }}" style="height:42px;padding:0 14px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Excel</button>
                   <button onClick="{{ doPrint }}" style="height:42px;padding:0 16px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپکردن</button>
@@ -940,7 +941,7 @@
                 <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
                   <button onClick="{{ doPrint }}" style="height:42px;padding:0 15px;border-radius:11px;background:#1B2A41;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپ / PDF</button>
                   <button onClick="{{ exportEmp }}" style="height:42px;padding:0 15px;border-radius:11px;background:#E8F6EF;color:#2E9E6B;font-weight:700;font-size:13px;border:1px solid #BFE6D2;display:flex;align-items:center;gap:6px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Excel</button>
-                  <button onClick="{{ openEmployee }}" style="height:42px;padding:0 16px;border-radius:11px;background:#1E8FD5;color:#fff;font-weight:800;font-size:13px;">+ کارمەندی نوێ</button>
+                  <button onClick="{{ openEmployee }}" style="height:42px;padding:0 16px;border-radius:11px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:13px;">+ کارمەندی نوێ</button>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E3E9F2;border-radius:16px;box-shadow:0 1px 2px rgba(14,26,43,.04),0 14px 30px -20px rgba(14,26,43,.2);overflow:hidden;">
@@ -965,8 +966,8 @@
   </sc-if>
 
   <sc-if value="{{ showStaffLogin }}">
-    <div style="flex:1;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 600px at 70% -10%, #EAF4FC, #F4F7FB 60%);padding:24px;">
-      <div style="width:400px;background:#fff;border:1px solid #E3E9F2;border-radius:22px;padding:34px 32px;box-shadow:0 24px 60px -24px rgba(27,42,65,.25);animation:pop .35s ease;">
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;background:radial-gradient(900px 520px at 78% -8%, rgba(30,143,213,.18), transparent 62%), radial-gradient(720px 480px at 10% 12%, rgba(22,195,201,.14), transparent 62%), radial-gradient(600px 500px at 50% 115%, rgba(124,92,236,.1), transparent 62%), #EEF2F8;padding:24px;">
+      <div style="width:400px;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border:1px solid rgba(227,233,242,.95);border-radius:24px;padding:34px 32px;box-shadow:0 30px 80px -30px rgba(27,42,65,.4);animation:pop .35s ease;">
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:24px;">
           <svg width="52" height="52" viewBox="0 0 48 48" fill="none"><path d="M4 24 C12 13, 36 13, 44 24 C36 35, 12 35, 4 24 Z" fill="#EAF4FC" stroke="#1E8FD5" stroke-width="2.6"/><circle cx="24" cy="24" r="7.6" fill="#1E8FD5"/><circle cx="21" cy="21" r="2.4" fill="#fff"/></svg>
           <div style="font-size:20px;font-weight:800;color:#1B2A41;">{{ cityName }}</div>
@@ -1247,6 +1248,41 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ modalUser }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(27,42,65,.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:overlay .2s ease;padding:24px;">
+      <div onClick="{{ stop }}" style="width:560px;max-width:100%;max-height:92vh;overflow-y:auto;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px -20px rgba(27,42,65,.45);animation:pop .25s ease;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;"><div style="font-size:18px;font-weight:800;color:#1B2A41;">{{ userModalTitle }}</div><button onClick="{{ closeModal }}" style="width:32px;height:32px;border-radius:9px;background:#F4F7FB;color:#6B7A90;font-size:18px;">✕</button></div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">ناوی تەواو</label><input id="um_name" placeholder="ناو…" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">پۆست / ڕۆڵ</label><select id="um_role" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 10px;font-size:14px;font-weight:600;outline:none;font-family:inherit;"><option value="accountant">ژمێریار (دەسەڵاتی دیاریکراو)</option><option value="admin">سوپەر ئەدمین (هەموو شتێک)</option></select></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">ناوی بەکارهێنەر</label><input id="um_user" placeholder="username" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;font-weight:700;outline:none;direction:ltr;text-align:right;"/></div>
+            <div><label style="font-size:12.5px;font-weight:700;color:#6B7A90;">وشەی نهێنی <sc-if value="{{ userModalEdit }}"><span style="color:#9AA8BC;font-weight:600;">(بەتاڵ = نەگۆڕین)</span></sc-if></label><input id="um_pass" type="password" placeholder="••••••" style="margin-top:6px;width:100%;height:46px;border:1px solid #E3E9F2;border-radius:12px;background:#FAFBFD;padding:0 14px;font-size:14px;outline:none;"/></div>
+          </div>
+          <div>
+            <div style="font-size:12.5px;font-weight:800;color:#1B2A41;margin-bottom:4px;">دەسەڵاتەکان — کام بەشانە دەبینێت و کار پێدەکات؟</div>
+            <div style="font-size:11.5px;color:#6B7A90;margin-bottom:10px;">تەنها بۆ ژمێریار — سوپەر ئەدمین خۆکارانە هەموو بەشەکانی هەیە.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <sc-for list="{{ permOptions }}" as="p" hint-placeholder-count="16">
+                <label style="display:flex;align-items:center;gap:9px;background:#FAFBFD;border:1px solid #EEF2F7;border-radius:10px;padding:9px 12px;font-size:12.5px;font-weight:600;color:#1B2A41;cursor:pointer;"><input type="checkbox" id="{{ p.cid }}" style="width:16px;height:16px;accent-color:#1E8FD5;flex-shrink:0;"/>{{ p.label }}</label>
+              </sc-for>
+            </div>
+          </div>
+          <sc-if value="{{ userModalEdit }}">
+            <label style="display:flex;align-items:center;gap:10px;background:#FAFBFD;border:1px solid #EEF2F7;border-radius:11px;padding:12px 14px;font-size:13px;font-weight:700;color:#1B2A41;cursor:pointer;"><input type="checkbox" id="um_active" style="width:17px;height:17px;accent-color:#2E9E6B;"/>هەژمار چالاکە (لابردنی ✓ = ڕاگرتنی چوونەژوورەوە)</label>
+          </sc-if>
+          <sc-if value="{{ qErr }}"><div style="background:#FCEDEF;color:#D1495B;font-size:12.5px;font-weight:700;border-radius:10px;padding:10px 13px;text-align:center;">{{ qErr }}</div></sc-if>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:22px;">
+          <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
+          <button onClick="{{ submitUser }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ toast }}">
     <div style="position:fixed;bottom:24px;left:24px;background:#1B2A41;color:#fff;padding:13px 20px;border-radius:13px;font-size:13.5px;font-weight:700;z-index:99;box-shadow:0 14px 40px -12px rgba(0,0,0,.5);animation:pop .25s ease;">{{ toast }}</div>
   </sc-if>
@@ -1265,7 +1301,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ submitEmployee }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+          <button onClick="{{ submitEmployee }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1286,7 +1322,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ submitItem }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+          <button onClick="{{ submitItem }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1307,7 +1343,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ submitSupplier }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+          <button onClick="{{ submitSupplier }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1324,7 +1360,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ submitSupPay }}" style="flex:1.4;height:46px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+          <button onClick="{{ submitSupPay }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1348,7 +1384,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ submitIncome }}" style="flex:1.4;height:46px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
+          <button onClick="{{ submitIncome }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:14px;">{{ quickBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1376,7 +1412,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ confirmPayment }}" style="flex:1.4;height:46px;border-radius:12px;background:#2E9E6B;color:#fff;font-weight:800;font-size:14px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);">{{ payBtnLabel }}</button>
+          <button onClick="{{ confirmPayment }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#2E9E6B,#1FB98A);color:#fff;font-weight:800;font-size:14px;box-shadow:0 10px 20px -10px rgba(46,158,107,.6);">{{ payBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1401,7 +1437,7 @@
           <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;color:#6B7A90;font-weight:600;">کۆی گشتی</span><div style="text-align:left;"><div style="font-size:24px;font-weight:900;color:#1B2A41;">{{ rc.main }}</div><div style="font-size:12px;color:#2BB3C0;font-weight:700;">{{ rc.sub }}</div></div></div>
           <div style="display:flex;gap:10px;margin-top:22px;">
             <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">داخستن</button>
-            <button style="flex:1;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپ</button>
+            <button style="flex:1;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>چاپ</button>
           </div>
         </div>
       </div>
@@ -1445,7 +1481,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:20px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ generateBills }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">{{ billGenLabel }}</button>
+          <button onClick="{{ generateBills }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ billGenLabel }}</button>
         </div>
       </div>
     </div>
@@ -1472,7 +1508,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:22px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ saveExpense }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">{{ expBtnLabel }}</button>
+          <button onClick="{{ saveExpense }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">{{ expBtnLabel }}</button>
         </div>
       </div>
     </div>
@@ -1496,7 +1532,7 @@
         </div>
         <div style="display:flex;gap:10px;margin-top:20px;">
           <button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;background:#F4F7FB;color:#6B7A90;font-weight:700;font-size:14px;">پاشگەزبوونەوە</button>
-          <button onClick="{{ closeModal }}" style="flex:1.4;height:46px;border-radius:12px;background:#1E8FD5;color:#fff;font-weight:800;font-size:14px;">بارکردن</button>
+          <button onClick="{{ closeModal }}" style="flex:1.4;height:46px;border-radius:12px;background:linear-gradient(100deg,#1E8FD5,#16C3C9);color:#fff;font-weight:800;font-size:14px;">بارکردن</button>
         </div>
       </div>
     </div>
@@ -1554,7 +1590,12 @@ class Component extends DCLogic {
       this.setState({mode:'owner', ownerAuthed:true, staffAuthed:false, dataReady:true, rate:d.rate});
     }else{
       this.owners = d.owners; this.flats = d.flats; this.overdue = d.overdue;
-      this.setState({staffAuthed:true, ownerAuthed:true, dataReady:true, rate:d.rate});
+      let scr = this.state.staffScreen;
+      if(d.user.role==='accountant' && Array.isArray(d.user.permissions)){
+        const ok = new Set(['dashboard'].concat(d.user.permissions));
+        if(!ok.has(scr)) scr = 'dashboard';
+      }
+      this.setState({staffAuthed:true, ownerAuthed:true, dataReady:true, rate:d.rate, staffScreen:scr});
     }
   }
   async doLogin(kind){
@@ -1720,6 +1761,42 @@ class Component extends DCLogic {
     s[k]=s[k]==='asc'?'desc':'asc';
     this.setState({sort:s});
   }
+  openUserModal(u){
+    this.setState({modal:'user', qErr:'', editUser: u||null});
+    setTimeout(()=>{
+      const v=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val||'';};
+      v('um_name', u?u.name:''); v('um_user', u?u.username:''); v('um_pass','');
+      const rs=document.getElementById('um_role'); if(rs) rs.value = u?(u.role==='owner'?'accountant':u.role):'accountant';
+      const MODS=(this.S&&this.S.modules)||[];
+      MODS.forEach(m=>{const cb=document.getElementById('um_p_'+m); if(cb) cb.checked = !!(u&&(u.permissions||[]).includes(m));});
+      const ac=document.getElementById('um_active'); if(ac) ac.checked = u?!!u.active:true;
+    },60);
+  }
+  async submitUser(){
+    if(this.state.demo || !this.S){ this.setState({modal:null}); return; }
+    const u=this.state.editUser;
+    const MODS=(this.S&&this.S.modules)||[];
+    const perms=MODS.filter(m=>{const cb=document.getElementById('um_p_'+m); return cb&&cb.checked;});
+    const body={name:this.val('um_name'), role:this.val('um_role')||'accountant', permissions:perms};
+    const pass=this.val('um_pass');
+    this.setState({busy:true, qErr:''});
+    try{
+      if(u){
+        if(pass) body.password=pass;
+        const ac=document.getElementById('um_active'); if(ac) body.active=ac.checked;
+        await this.api('/users/'+u.id, {method:'PUT', body:JSON.stringify(body)});
+      }else{
+        body.username=this.val('um_user'); body.password=pass;
+        if(!body.name||!body.username||!pass||pass.length<6){ this.setState({busy:false, qErr:'ناو، ناوی بەکارهێنەر و وشەی نهێنی (٦ پیت یان زیاتر) پێویستە'}); return; }
+        await this.api('/users', {method:'POST', body:JSON.stringify(body)});
+      }
+      await this.loadData();
+      this.setState({busy:false, modal:null, editUser:null});
+      this.flash(u?'بەکارهێنەر نوێکرایەوە ✓':'بەکارهێنەر زیادکرا ✓');
+    }catch(e){
+      this.setState({busy:false, qErr: e.message==='username_taken'?'ئەم ناوی بەکارهێنەرە گیراوە':e.message==='cannot_lock_self_out'?'ناتوانیت هەژماری خۆت ناچالاک بکەیت':'هەڵە ڕوویدا'});
+    }
+  }
 
   owners = [
     {id:'O1', name:'ئاکۆ مەحمود حسێن', short:'ئاکۆ مەحمود', mobile:'07701234567'},
@@ -1798,13 +1875,15 @@ class Component extends DCLogic {
     const st = this.state;
     const staff = st.mode==='staff';
     const S = this.S || null;
+    const allowSet = (S && S.user.role==='accountant' && Array.isArray(S.user.permissions)) ? new Set(S.user.permissions) : null;
+    const navAllowed = (id) => !allowSet || id==='dashboard' || allowSet.has(id);
     const myPaysSrc = S ? ((S.user.role==='owner') ? (S.myPayments||[]) : ((S.ownerPreview&&S.ownerPreview.myPayments)||[])) : null;
     const myOwnedSrc = S ? ((S.user.role==='owner') ? (S.flats||[]) : ((S.ownerPreview&&S.ownerPreview.flats)||[])) : null;
     const myOwedIqd = S ? ((S.user.role==='owner') ? (S.owedIqd||0) : ((S.ownerPreview&&S.ownerPreview.owedIqd)||0)) : 440000;
     const tab = (active)=>({padding:'8px 16px',borderRadius:'9px',fontSize:'13px',fontWeight:700,transition:'all .2s',
       background: active ? 'linear-gradient(100deg,#1E8FD5,#16C3C9)' : 'transparent', color: active ? '#fff' : '#6B7A90', boxShadow: active ? '0 8px 18px -8px rgba(30,143,213,.7)' : 'none'});
     const navItem = (id,label,icon,badge)=>{ const on = st.staffScreen===id; return {
-      label, icon: this.icon(icon,on,'#FFFFFF'), badge,
+      label, icon: this.icon(icon,on,'#FFFFFF'), badge, _ok: navAllowed(id),
       go: ()=>this.navTo(id),
       style:{display:'flex',alignItems:'center',gap:'11px',width:'100%',padding:'10px 12px',borderRadius:'11px',transition:'all .15s',
         background: on ? 'linear-gradient(100deg,#1E8FD5,#16C3C9)' : 'transparent', color: on ? '#fff' : '#1B2A41', boxShadow: on ? '0 12px 24px -12px rgba(30,143,213,.6)' : 'none'},
@@ -1975,11 +2054,21 @@ class Component extends DCLogic {
       {name:'پسوڵەی فاتورە — حوزەیران',cat:'پسوڵە',c:'#2E9E6B',meta:'PDF · 2026-06-09'},
       {name:'قۆناغی خاوەندارێتی — B3-9-1',cat:'خاوەندارێتی',c:'#E0A100',meta:'PDF · 2018-05-03'},
     ];
-    const usersList=[
+    const roleMeta=(r,active)=> active===false ? {label:'ناچالاک', bg:'#EEF2F7', c:'#6B7A90'} :
+      r==='admin' ? {label:'سوپەر ئەدمین', bg:'#F0EAFB', c:'#7A5BC0'} :
+      r==='accountant' ? {label:'ژمێریار', bg:'#EAF4FC', c:'#1577B8'} : {label:'خاوەن', bg:'#E6F7F9', c:'#1f8a96'};
+    const usersList=(S&&S.usersList&&S.usersList.length)
+      ? S.usersList.map(u=>{ const m=roleMeta(u.role,u.active); return {
+          initial:(u.name||'?').trim()[0], name:u.name,
+          user:'@'+u.username+(u.role==='accountant'?' · '+((u.permissions||[]).length)+' بەش':''),
+          role:m.label, roleBg:m.bg, roleC:m.c, canEdit:u.role!=='owner', edit:()=>this.openUserModal(u)}; })
+      : [
       {name:'هێرش ئەکاونتانت',user:'hersh.acc',role:'ژمێریار',initial:'ھـ',roleBg:'#EAF4FC',roleC:'#1577B8'},
       {name:'بەختیار بەڕێوەبەر',user:'admin',role:'بەڕێوەبەر',initial:'بـ',roleBg:'#F0EAFB',roleC:'#7A5BC0'},
       {name:'هاوژین یاریدەدەر',user:'hawzhin',role:'یاریدەدەر',initial:'هـ',roleBg:'#EEF2F7',roleC:'#6B7A90'},
     ];
+    const PERM_LABELS={buildings:'عیمارە و شوقەکان',owners:'خاوەنەکان',rent:'کرێ',mortgage:'قیست (مۆرگەج)',bills:'خزمەتگوزاری و فاتورە',items:'کاڵا',payments:'پارەوەرگرتن و پسوڵە',statement:'کەشف حساب',overdue:'بیرخەرەوە',documents:'بەڵگەنامە',expenses:'خەرجی',income:'داهاتی جۆراوجۆر',employees:'کارمەندان',cashbox:'صندوق',reports:'ڕاپۆرت',settings:'ڕێکخستن'};
+    const permOptions=((S&&S.modules)||Object.keys(PERM_LABELS)).map(m=>({cid:'um_p_'+m, label:PERM_LABELS[m]||m}));
     // reports
     const reports=[
       {title:'ڕاپۆرتی کۆکردنەوە',sub:'کۆی کۆکراوە بەپێی مانگ',bars:[60,72,80,88,84,95],c:'#1E8FD5'},
@@ -2200,7 +2289,7 @@ class Component extends DCLogic {
         navItem('employees','کارمەندان','employees'),
         navItem('cashbox','صندوق','cashbox'),
         navItem('reports','ڕاپۆرت','reports'), navItem('settings','ڕێکخستن','settings'),
-      ],
+      ].filter(x=>x._ok),
       scr_dashboard: st.staffScreen==='dashboard', scr_overdue: st.staffScreen==='overdue',
       scr_buildings: st.staffScreen==='buildings', building: st.building, floor: st.floor,
       scr_flat: st.staffScreen==='flat', scr_owners: st.staffScreen==='owners',
@@ -2256,6 +2345,13 @@ class Component extends DCLogic {
       suppayName: (st.payTarget&&st.payTarget.name)||'',
       modalEmployee: st.modal==='employee', modalItem: st.modal==='item', modalSupplier: st.modal==='supplier',
       modalIncome: st.modal==='income', modalSupPay: st.modal==='suppay',
+      modalUser: st.modal==='user',
+      userModalTitle: st.editUser ? 'گۆڕینی بەکارهێنەر — '+(st.editUser.name||'') : 'بەکارهێنەری نوێ',
+      userModalEdit: !!st.editUser, userModalNew: !st.editUser, permOptions,
+      openUser: ()=>this.openUserModal(null), submitUser: ()=>this.submitUser(),
+      sideUserName: S ? S.user.name : 'هێرش ئەکاونتانت',
+      sideUserRole: S ? (S.user.role==='admin' ? 'سوپەر ئەدمین' : S.user.role==='accountant' ? 'ژمێریار' : 'خاوەن') : 'ژمێریار',
+      sideUserInit: ((S ? S.user.name : 'ھ').trim()[0]||'ھ')+'ـ',
       cashBalanceIqd:this.iqd((S&&S.cash)?S.cash.balance:186420000), cashBalanceUsd:this.usd((S&&S.cash)?S.cash.balance:186420000), incomeIqd:this.iqd((S&&S.cash)?S.cash.monthIncome:142500000), expenseSumIqd:this.iqd((S&&S.cash)?S.cash.monthExpense:38600000), reports,
       myFlats, myPayments, myDocs, docVault, usersList,
       openUpload: ()=>this.setState({modal:'upload'}), openExpense: ()=>this.setState({modal:'expense'}),
